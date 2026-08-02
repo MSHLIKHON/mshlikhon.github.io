@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06100d"/><stop offset="1" stop-color="#0d2b20"/></linearGradient><pattern id="p" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#72f6b1" stroke-opacity=".08"/></pattern></defs>
+  <rect width="1200" height="630" fill="url(#g)"/><rect width="1200" height="630" fill="url(#p)"/>
+  <circle cx="1010" cy="100" r="250" fill="#5fb6ff" opacity=".06"/><circle cx="120" cy="580" r="270" fill="#72f6b1" opacity=".08"/>
+  <rect x="82" y="82" width="92" height="92" rx="22" fill="none" stroke="#72f6b1" stroke-width="3"/><text x="128" y="140" text-anchor="middle" fill="#72f6b1" font-family="monospace" font-size="25" font-weight="700">MSH</text>
+  <text x="82" y="290" fill="#effff7" font-family="Arial, sans-serif" font-size="78" font-weight="800">Md. Shyed Hasan Likhon</text>
+  <text x="86" y="360" fill="#72f6b1" font-family="monospace" font-size="31">CSE STUDENT / ASPIRING SOFTWARE ENGINEER</text>
+  <text x="86" y="430" fill="#9cb4a8" font-family="Arial, sans-serif" font-size="28">Programming · Databases · Software Analysis · Leadership</text>
+  <text x="86" y="535" fill="#5fb6ff" font-family="monospace" font-size="22">Dhaka, Bangladesh  //  PORTFOLIO://ONLINE</text>
+</svg>

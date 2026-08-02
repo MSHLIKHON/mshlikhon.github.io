@@ -1,0 +1,9 @@
+HOW TO ADD YOUR PROFILE PHOTO
+
+1. Choose a clear square or portrait photo.
+2. Rename it exactly: profile.jpg
+3. Copy it into this assets folder.
+4. Refresh index.html.
+
+Recommended size: 800 x 800 pixels or larger.
+The website will show MSL initials automatically when profile.jpg is absent.

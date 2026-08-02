@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Resume of Md. Shyed Hasan Likhon" />
+  <title>Resume | Md. Shyed Hasan Likhon</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <style>
+    :root { --ink:#14231d; --muted:#5f7068; --accent:#08794b; --line:#dce7e1; --paper:#fff; --bg:#eaf1ed; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--bg); font-family:Arial, Helvetica, sans-serif; line-height:1.45; }
+    .toolbar { position:sticky; top:0; z-index:10; display:flex; justify-content:center; gap:10px; padding:12px; background:#0b1b14; }
+    .toolbar a,.toolbar button { padding:10px 14px; border:1px solid #4f7564; border-radius:8px; color:#eafff5; background:transparent; font:700 12px Arial; cursor:pointer; text-decoration:none; }
+    .toolbar button { color:#04130c; background:#72f6b1; border-color:#72f6b1; }
+    .page { width:210mm; min-height:297mm; margin:22px auto; padding:16mm 17mm; background:var(--paper); box-shadow:0 20px 55px rgba(16,47,33,.16); }
+    header { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:18px; padding-bottom:20px; border-bottom:2px solid var(--accent); }
+    .resume-avatar { position:relative; display:grid; place-items:center; width:76px; height:76px; overflow:hidden; border:2px solid var(--accent); border-radius:14px; color:var(--accent); background:#f2faf6; font-weight:800; }
+    .resume-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 22%; opacity:0; }
+    .resume-avatar.has-photo .resume-photo { opacity:1; }
+    .resume-avatar.has-photo span { opacity:0; }
+    h1 { margin:0 0 5px; font-size:31px; letter-spacing:-.8px; }
+    .title { color:var(--accent); font-weight:700; }
+    .contact { display:grid; gap:5px; text-align:right; font-size:11.5px; }
+    .contact a { color:inherit; text-decoration:none; }
+    .summary { margin:18px 0; color:#33473d; font-size:12.5px; }
+    .grid { display:grid; grid-template-columns:1.55fr .85fr; gap:28px; }
+    section { margin-bottom:19px; }
+    h2 { margin:0 0 10px; padding-bottom:5px; border-bottom:1px solid var(--line); color:var(--accent); font-size:13px; text-transform:uppercase; letter-spacing:1.1px; }
+    h3 { margin:0 0 2px; font-size:12.5px; }
+    h4 { margin:0 0 4px; color:var(--muted); font-size:11.5px; font-weight:500; }
+    p,li { font-size:11.3px; }
+    ul { margin:5px 0 0; padding-left:17px; }
+    li { margin-bottom:3px; }
+    .item { margin-bottom:12px; break-inside:avoid; }
+    .meta { display:flex; justify-content:space-between; gap:10px; margin-bottom:3px; color:var(--muted); font-size:10.8px; }
+    .chips { display:flex; flex-wrap:wrap; gap:5px; }
+    .chips span { padding:4px 6px; border:1px solid var(--line); border-radius:5px; background:#f7faf8; font-size:10.5px; }
+    .side p { margin:5px 0; }
+    .link { color:var(--accent); overflow-wrap:anywhere; }
+    @media (max-width:850px) { .page{width:auto; min-height:0; margin:0; padding:26px 20px; box-shadow:none;} header{grid-template-columns:auto 1fr}.contact{grid-column:1 / -1;text-align:left}.grid{grid-template-columns:1fr}.toolbar{position:static} }
+    @media print { @page { size:A4; margin:0; } body{background:#fff}.toolbar{display:none}.page{margin:0; box-shadow:none; width:210mm; min-height:297mm;} a{color:inherit!important;text-decoration:none!important;} }
+  </style>
+</head>
+<body>
+  <div class="toolbar"><a href="index.html">← Back to Portfolio</a><a href="assets/Md-Shyed-Hasan-Likhon-CV.pdf" download="Md-Shyed-Hasan-Likhon-CV.pdf">Download CV PDF</a><button type="button" onclick="window.print()">Print / Save as PDF</button></div>
+  <article class="page">
+    <header>
+      <div class="resume-avatar">
+        <img class="resume-photo" src="assets/profile.jpg" alt="Portrait of Md. Shyed Hasan Likhon" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()" />
+        <span aria-hidden="true">MSL</span>
+      </div>
+      <div><h1>Md. Shyed Hasan Likhon</h1><div class="title">Computer Science & Engineering Student</div></div>
+      <div class="contact">
+        <a href="mailto:myselfmshl@gmail.com">myselfmshl@gmail.com</a>
+        <a href="tel:+8801797375496">+880 1797-375496</a>
+        <span>Dhaka, Bangladesh</span>
+        <a href="https://github.com/MSHLIKHON">github.com/MSHLIKHON</a>
+        <a href="https://www.linkedin.com/in/md-shyed-hasan-likhon-2133851a5/">LinkedIn Profile</a>
+      </div>
+    </header>
+
+    <p class="summary">Motivated and responsible Computer Science and Engineering student with foundational knowledge of programming, database management, software analysis, and computer networking. Interested in learning new technologies and applying technical knowledge to solve practical problems. Experienced in teamwork, leadership, event management, volunteering, and public communication.</p>
+
+    <div class="grid">
+      <main>
+        <section>
+          <h2>Education</h2>
+          <div class="item"><div class="meta"><strong>BSc in Computer Science and Engineering</strong><span>Expected June 2027</span></div><h4>United International University (UIU), Dhaka</h4><p>89 credits completed</p></div>
+          <div class="item"><div class="meta"><strong>Higher Secondary Certificate — Science</strong><span>2020</span></div><h4>New Govt. Degree College, Rajshahi</h4><p>GPA: 5.00 / 5.00</p></div>
+          <div class="item"><div class="meta"><strong>Secondary School Certificate — Science</strong><span>2018</span></div><h4>Naogaon Krishnadhan Govt High School, Naogaon</h4><p>GPA: 5.00 / 5.00</p></div>
+        </section>
+
+        <section>
+          <h2>Selected Projects</h2>
+          <div class="item"><h3>ChargeBD — Smart EV Charging Network and Management System</h3><h4>Final Year Project · In Progress</h4><p>Developing the concept and software scope for a Bangladesh-focused EV charging platform with station discovery, availability, reservations, digital payment, and owner/admin dashboards.</p></div>
+          <div class="item"><h3>Mayor's Rise</h3><h4>Advanced OOP Laboratory · Java</h4><p>Collaborated on planning, program structure, data handling, and the application of inheritance, encapsulation, and polymorphism.</p><p class="link">github.com/ashad-abir/Mayor-s-Rise</p></div>
+          <div class="item"><h3>Earthquake Safety and Emergency Management Application</h3><h4>DBMS Laboratory</h4><p>Designed the ER diagram, database schema, tables, and relationships for affected areas, shelters, rescue information, and user records.</p></div>
+          <div class="item"><h3>Smart Waste Recycling and Management System</h3><h4>System Analysis and Design Laboratory</h4><p>Prepared system requirements, workflows, user roles, and diagrams for a software-based waste collection and recycling solution.</p></div>
+          <div class="item"><h3>Fire-Fighting Robot</h3><h4>Electronics Laboratory</h4><p>Participated in assembling, testing, and demonstrating a basic robot using sensors, motors, electronic components, and a microcontroller.</p></div>
+        </section>
+
+        <section>
+          <h2>Leadership & Volunteering</h2>
+          <div class="item"><div class="meta"><strong>Deputy Logistics, UIU Social Services Club</strong><span>2024–Present</span></div><p>Support event logistics, volunteer coordination, material management, and social-service programme execution.</p></div>
+          <div class="item"><div class="meta"><strong>General Member, UIU App Forum</strong><span>2023–Present</span></div><p>Participate in technology activities, workshops, seminars, and collaborative learning programmes.</p></div>
+          <div class="item"><div class="meta"><strong>Founder & Volunteer, Personal Social Welfare Initiative</strong><span>2020–Present</span></div><p>Organised relief and community-support activities during COVID-19 and flood emergencies, and supported underprivileged children.</p></div>
+        </section>
+      </main>
+
+      <aside class="side">
+        <section><h2>Programming</h2><div class="chips"><span>C</span><span>C++</span><span>Java</span><span>JavaScript</span><span>PHP</span><span>HTML</span><span>CSS</span></div></section>
+        <section><h2>Database</h2><div class="chips"><span>MySQL</span><span>SQL</span><span>ER Diagram</span><span>Database Design</span></div></section>
+        <section><h2>Core Computer Science</h2><div class="chips"><span>DSA I & II</span><span>OOP</span><span>DBMS</span><span>System Analysis</span><span>Intro AI</span><span>Architecture</span><span>Probability & Statistics</span></div></section>
+        <section><h2>Networking</h2><div class="chips"><span>Cisco Packet Tracer</span><span>IP Addressing</span><span>Router & Switch Basics</span></div></section>
+        <section><h2>Tools</h2><div class="chips"><span>Git</span><span>GitHub</span><span>VS Code</span><span>Canva</span><span>Word</span><span>PowerPoint</span><span>Excel</span></div></section>
+        <section><h2>Soft Skills</h2><div class="chips"><span>Leadership</span><span>Public Speaking</span><span>Teamwork</span><span>Event Management</span><span>Problem-Solving</span><span>Communication</span><span>Adaptability</span><span>Time Management</span><span>Decision-Making</span></div></section>
+        <section><h2>Languages</h2><p><strong>Bangla</strong><br>Native</p><p><strong>English</strong><br>Intermediate Working Proficiency</p></section>
+      </aside>
+    </div>
+  </article>
+</body>
+</html>
