@@ -132,18 +132,13 @@
   });
 
   document.getElementById('contact-form')?.addEventListener('submit', (event) => {
-    if (event.currentTarget.getAttribute('method') === 'POST') return;
-    event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) {
+      event.preventDefault();
       form.reportValidity();
       return;
     }
-    const data = new FormData(form);
-    const subject = encodeURIComponent(data.get('subject'));
-    const body = encodeURIComponent(`Hello Likhon,\n\n${data.get('message')}\n\nFrom: ${data.get('name')}\nEmail: ${data.get('email')}`);
-    window.location.href = `mailto:myselfmshl@gmail.com?subject=${subject}&body=${body}`;
-    showToast('Opening your email application...');
+    form.querySelector('[name="_subject"]').value = `Portfolio: ${form.elements.subject.value}`;
   });
 
   const year = document.getElementById('current-year');
