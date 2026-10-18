@@ -132,6 +132,7 @@
   });
 
   document.getElementById('contact-form')?.addEventListener('submit', (event) => {
+    if (event.currentTarget.getAttribute('method') === 'POST') return;
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) {

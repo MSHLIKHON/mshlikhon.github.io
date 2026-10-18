@@ -419,14 +419,16 @@
           <button class="copy-email" type="button" data-email="myselfmshl@gmail.com">Copy email address</button>
         </div>
 
-        <form class="contact-form" id="contact-form" novalidate>
+        <form class="contact-form" id="contact-form" action="https://formsubmit.co/myselfmshl@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New portfolio message" />
           <div class="form-status">MESSAGE_COMPOSER.exe</div>
           <label>Name<input type="text" name="name" autocomplete="name" required placeholder="Your name" /></label>
           <label>Email<input type="email" name="email" autocomplete="email" required placeholder="you@example.com" /></label>
           <label>Subject<input type="text" name="subject" required placeholder="Project, opportunity, or collaboration" /></label>
           <label>Message<textarea name="message" rows="5" required placeholder="Write your message..."></textarea></label>
-          <button class="button button-primary" type="submit">Open in Email App <span>↗</span></button>
-          <p class="form-note">This static form securely opens your default email application. No message is stored on this website.</p>
+          <button class="button button-primary" type="submit">Send Message <span>↗</span></button>
+          <p class="form-note">FormSubmit processes your name, email and message and emails them to me. A spam check may be required.</p>
+          <a class="button button-secondary" href="https://wa.me/8801797375496" target="_blank" rel="noopener noreferrer">Message on WhatsApp ↗</a>
         </form>
       </div>
     </section>
