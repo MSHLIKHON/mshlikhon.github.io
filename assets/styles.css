@@ -109,7 +109,7 @@ html[data-theme="light"] .theme-icon-moon { display: block; }
 
 .section { width: min(1180px, calc(100% - 40px)); margin: auto; padding: 118px 0; }
 .section-alt { position: relative; }
-.section-alt::before { content: ""; position: absolute; z-index: -1; inset: 24px -100vw; border-block: 1px solid var(--line); background: color-mix(in srgb, var(--bg-elevated) 68%, transparent); }
+.section-alt::before { content: ""; position: absolute; z-index: -1; inset: 24px calc((min(1180px, 100vw - 40px) - 100vw) / 2); border-block: 1px solid var(--line); background: color-mix(in srgb, var(--bg-elevated) 68%, transparent); }
 .hero { min-height: 100svh; padding-top: 156px; padding-bottom: 72px; display: grid; align-content: center; }
 .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(42px, 7vw, 94px); align-items: center; }
 .eyebrow, .section-index, .card-label, .project-meta, .role-time, .form-status { font-family: var(--mono); text-transform: uppercase; letter-spacing: .09em; }
@@ -340,5 +340,23 @@ pre { margin: 0; overflow-x: auto; color: var(--muted); font-family: var(--mono)
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .reveal { opacity: 1; transform: none; }
+  .cursor-glow { display: none; }
+}
+
+/* Keep mobile content within the viewport, including intrinsic grid widths. */
+html { overflow-x: clip; }
+.hero-grid > *, .about-grid > *, .contact-shell > *,
+.projects-grid > *, .timeline-item > *, .focus-item > * { min-width: 0; }
+.contact-form input, .contact-form textarea { min-width: 0; }
+.project-meta, .project-links { flex-wrap: wrap; }
+.contact-list strong { overflow-wrap: anywhere; }
+@media (max-width: 680px) {
+  .section-alt::before { inset-inline: -14px; }
+  .terminal-card { transform: none; }
+  .contact-form input, .contact-form textarea { font-size: 16px; }
+  .nav-shell { gap: 12px; }
+  .theme-toggle, .menu-toggle { flex-shrink: 0; }
+}
+@media (hover: none) and (pointer: coarse) {
   .cursor-glow { display: none; }
 }
