@@ -49,3 +49,22 @@
  .project-card { padding:24px; }
  .project-featured { padding:0; }
 }
+
+/* Editorial portrait, ruled chapters and numbered work index. */
+.identity-print { margin:0; width:min(100%,24rem); justify-self:center; border:2px solid var(--text); color:var(--text); box-shadow:7px 7px 0 var(--accent); }
+.print-label,.identity-print figcaption { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:.5rem; padding:.85rem 1rem; }
+.print-label { background:var(--text); color:var(--bg); font:.69rem var(--mono); letter-spacing:.08em; }
+.identity-print img { display:block; width:100%; aspect-ratio:5/4; object-fit:cover; object-position:50% 25%; }
+.identity-print figcaption { border-top:2px solid; background:var(--bg-elevated); }
+.identity-print figcaption span { font:.72rem var(--mono); color:var(--muted); }
+.section + .section { border-top:2px solid var(--line-strong); }
+.section-heading { max-width:none; }
+.section-heading h2 { text-transform:uppercase; font-weight:850; line-height:.98; }
+.section-index { display:inline-block; padding:.35rem .65rem; background:var(--accent); color:var(--bg); }
+.projects-grid { counter-reset:work; }
+.project-card { counter-increment:work; border-radius:3px; }
+.project-meta::before { content:counter(work,decimal-leading-zero); font-weight:bold; border-bottom:2px solid var(--accent); color:var(--text); }
+.project-meta { align-items:baseline; }
+.skill-card,.leadership-card,.focus-card,.about-card,.contact-shell { border-radius:4px; }
+@media(min-width:981px){ .section-heading {display:grid; grid-template-columns:10rem 1fr; align-items:start; gap:.5rem 2rem;} .section-index {justify-self:start;} .section-heading > p:last-child {grid-column:2;} }
+@media(max-width:680px){ .identity-print {width:min(100% - 14px,23rem);} .hero-grid {grid-template-columns:minmax(0,1fr);} .section-heading h2 {overflow-wrap:anywhere;} }
