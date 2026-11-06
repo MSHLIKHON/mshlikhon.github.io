@@ -15,6 +15,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="stylesheet" href="assets/polish.css" />
+  <script defer src="assets/relay.js"></script>
   <script defer src="assets/script.js"></script>
 </head>
 <body>
@@ -36,6 +37,7 @@
       <div class="nav-links" id="nav-links">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#lab">Play Lab</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
         <a href="#leadership">Leadership</a>
@@ -63,6 +65,7 @@
           <div class="hero-actions">
             <a class="button button-primary" href="#projects">Explore Projects <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="resume.html">View Résumé <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="#lab">Play Signal Relay ↓</a>
           </div>
 
           <div class="social-row" aria-label="Social profiles">
@@ -195,6 +198,10 @@
       </div>
     </section>
 
+    <section class="section relay" id="lab" aria-labelledby="relay-title">
+      <div class="relay-intro"><p class="section-index">INTERACTIVE LAB / NETWORKS</p><h2 id="relay-title">Signal <em>Relay.</em></h2><p>A little network puzzle. Rotate the junctions to carry a signal from the inlet on the left to the outlet on the right. Connected pipes light up as you play.</p><button class="button button-secondary" id="shuffle" type="button">New circuit ↻</button></div>
+      <div class="instrument"><header><span>◉ &nbsp; PATCH PANEL</span><span>4 × 4</span></header><div class="socket">IN →</div><div id="pipes" aria-label="Circuit tiles"></div><div class="socket out">→ OUT</div><footer id="signal-status" role="status"></footer></div>
+    </section>
     <section class="section section-alt" id="skills">
       <div class="section-heading reveal">
         <p class="section-index">03 // SKILLS</p>
