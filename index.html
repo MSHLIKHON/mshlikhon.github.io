@@ -15,7 +15,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="stylesheet" href="assets/polish.css" />
-  <script defer src="assets/relay.js"></script>
+  <script defer src="assets/bug-blaster.js"></script>
   <script defer src="assets/script.js"></script>
   <script defer src="assets/dispatch.js"></script>
 </head>
@@ -39,7 +39,7 @@
       <div class="nav-links" id="nav-links">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
-        <a href="#lab">Play Lab</a>
+        <a href="#lab">Bug Blaster</a>
         <a href="#github">GitHub</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
@@ -214,17 +214,33 @@
         </article>
 
         <article class="project-card reveal" data-category="software">
-          <div class="project-meta"><span>Playable project</span><span>JavaScript</span></div>
-          <h3>Signal Relay</h3>
-          <p>I wanted visitors to try a networking idea for themselves. I turned a four-by-four grid into a circuit puzzle. Rotate a junction and the board traces which tiles can receive the signal.</p>
-          <div class="project-links"><a href="#lab">Play the live puzzle ↓</a></div>
+          <div class="project-meta"><span>Playable project</span><span>Canvas · JavaScript</span></div>
+          <h3>Bug Blaster</h3>
+          <p>A small debugging arcade built for this portfolio. Move the compiler jet and patch bugs before they reach production.</p>
+          <div class="project-links"><a href="#lab">Play in the browser ↓</a></div>
         </article>
       </div>
     </section>
 
-    <section class="section relay" id="lab" aria-labelledby="relay-title">
-      <div class="relay-intro"><p class="section-index">INTERACTIVE LAB / NETWORKS</p><h2 id="relay-title">Signal <em>Relay.</em></h2><p>A little network puzzle. Rotate the junctions to carry a signal from the inlet on the left to the outlet on the right. Connected pipes light up as you play.</p><label><input type="checkbox" id="hover-mode"> Rotate tiles on hover</label> <button class="button button-secondary" id="shuffle" type="button">New circuit ↻</button></div>
-      <div class="instrument"><header><span>◉ &nbsp; PATCH PANEL</span><span>4 × 4</span></header><div class="socket">IN →</div><div id="pipes" aria-label="Circuit tiles"></div><div class="socket out">→ OUT</div><footer id="signal-status" role="status"></footer></div>
+    <section class="section bug-lab" id="lab" aria-labelledby="bug-title">
+      <div class="bug-copy">
+        <p class="section-index">INTERACTIVE LAB / DEBUGGING</p>
+        <h2 id="bug-title">Bug <em>Blaster.</em></h2>
+        <p>Move the compiler jet. Patch bugs before uptime reaches zero.</p>
+        <p class="bug-controls">Mouse or touch · ← → / A D · Space to fire</p>
+      </div>
+      <div class="bug-console">
+        <header><span>COMPILER JET</span><span>SCORE <strong id="bug-score">000</strong> · UPTIME <strong id="bug-health">100%</strong></span></header>
+        <div class="bug-stage">
+          <canvas id="bug-canvas" width="720" height="420" aria-label="Bug Blaster game. Move the jet and shoot falling software bugs."></canvas>
+          <div class="bug-overlay" id="bug-overlay">
+            <small id="bug-kicker">SYSTEM READY</small>
+            <h3 id="bug-message">Production needs a patch.</h3>
+            <button type="button" id="bug-start">Deploy jet →</button>
+          </div>
+        </div>
+        <footer><span id="bug-log" role="status">Waiting for deployment.</span><label><input id="bug-autofire" type="checkbox" checked> Auto fire</label></footer>
+      </div>
     </section>
     <section class="section" id="github" aria-labelledby="github-title">
       <div class="section-heading"><p class="section-index">GITHUB / @MSHLIKHON</p><h2 id="github-title">From my <span>repositories.</span></h2></div>
