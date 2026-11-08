@@ -1,4 +1,19 @@
 /* Keep the original terminal identity, with a clearer portrait and reading rhythm. */
+.project-shot { display:block; width:100%; height:auto; aspect-ratio:1152/800; background:var(--bg); border-bottom:1px solid var(--line); }
+.charge-demo { margin-top:1rem; border-top:1px solid var(--line); padding:1rem 0; }
+.charge-demo summary { cursor:pointer; color:var(--accent); font-weight:700; }
+.charge-demo ol { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr)); gap:.6rem; padding:0; list-style:none; }
+.charge-demo li { border-inline-start:2px solid var(--accent); padding:.75rem; background:var(--surface); font-size:.9rem; }
+.charge-demo li strong { display:block; color:var(--accent); margin-bottom:.3rem; }
+.charge-demo select,.charge-demo button { font:inherit; padding:.45rem; margin:.25rem 0; }
+#lab label { display:block; margin:1rem 0; }
+#pipes button svg { pointer-events:none; }
+@media(max-width:720px){
+  .noise,.cursor-glow {display:none}
+  .hero-copy.reveal,.hero-portrait.reveal {opacity:1;transform:none;transition:none}
+  .hero-portrait img {filter:none}
+}
+@media(max-width:720px){.hero-portrait img,.hero-portrait .portrait-halo,.terminal-caret{animation:none!important}}
 .hero { position:relative; padding-top:160px; min-height:95svh; }
 .hero-grid { grid-template-columns:1.25fr .75fr; gap:55px; }
 .hero h1 { font-size:clamp(5rem,10vw,9rem); line-height:.95; letter-spacing:-.065em; margin:25px 0; }

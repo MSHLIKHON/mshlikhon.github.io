@@ -7,7 +7,6 @@
   };
   const savedTheme = storage.get('msh-theme');
   root.dataset.theme = savedTheme || 'dark';
-
   themeToggle?.addEventListener('click', () => {
     root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
     storage.set('msh-theme', root.dataset.theme);
@@ -30,35 +29,13 @@
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const typingText = document.getElementById('typing-text');
-  const phrases = [
-    'Loading CSE student profile...',
-    'Building practical software solutions...',
-    'Exploring smart mobility and databases...',
-    'Ready to learn, collaborate, and contribute.'
-  ];
-
-  if (typingText && !reducedMotion) {
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-    const type = () => {
-      const phrase = phrases[phraseIndex];
-      charIndex += deleting ? -1 : 1;
-      typingText.textContent = phrase.slice(0, charIndex);
-      let delay = deleting ? 22 : 45;
-      if (!deleting && charIndex === phrase.length) {
-        deleting = true;
-        delay = 1450;
-      } else if (deleting && charIndex === 0) {
-        deleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        delay = 260;
-      }
-      window.setTimeout(type, delay);
-    };
-    type();
-  } else if (typingText) {
-    typingText.textContent = phrases[3];
+  if (typingText) {
+    const hour = Number(new Intl.DateTimeFormat('en-GB', {hour: '2-digit', hourCycle: 'h23', timeZone: 'Asia/Dhaka'}).format(new Date()));
+    const greeting = hour < 6 || hour >= 18 ? 'শুভ সন্ধ্যা · Good evening' : hour < 12 ? 'শুভ সকাল · Good morning' : 'শুভ অপরাহ্ণ · Good afternoon';
+    typingText.textContent = greeting + ' from Dhaka.';
+  }
+  if (typingText && !reducedMotion && matchMedia('(min-width: 720px)').matches) {
+    typingText.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 650 });
   }
 
   const reveals = document.querySelectorAll('.reveal');

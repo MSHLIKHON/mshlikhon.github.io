@@ -40,5 +40,14 @@
     moves=0;draw();
   }
   for(let i=0;i<16;i++){const b=document.createElement('button');b.type='button';b.onclick=()=>{if(!won){tiles[i]=turns(tiles[i]);moves++;draw();}};board.append(b);}
+  board.addEventListener('pointerover', event => {
+    const tile = event.target.closest('button');
+    if (tile && event.pointerType === 'mouse' && !tile.contains(event.relatedTarget) && document.querySelector('#hover-mode').checked) tile.click();
+  });
+  const station = document.querySelector('#station');
+  const slot = document.querySelector('#slot');
+  document.querySelector('#reserve').onclick = () => {
+    document.querySelector('#receipt').textContent = 'Preview confirmed · ' + station.value + ' · ' + slot.value + '–' + (slot.value === '09:00' ? '09:30' : '14:30');
+  };
   document.querySelector('#shuffle').onclick=reset;reset();
 })();
