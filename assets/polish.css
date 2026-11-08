@@ -1,4 +1,22 @@
 /* Keep the original terminal identity, with a clearer portrait and reading rhythm. */
+#arrival:not([hidden]){position:fixed;inset:0;z-index:1000;background:#071510;color:#eafff2;display:grid;place-items:center}
+.arrival-card{width:min(85vw,36rem);border-left:3px solid #72f6b1;padding:2rem;animation:arrive .55s ease-out}
+.arrival-card strong{display:block;color:#72f6b1;font-size:clamp(3rem,10vw,6rem);line-height:1.6}
+.arrival-card small,.dispatch-readout,.repo-shelf small{font-family:var(--mono);letter-spacing:.07em}
+.arrival-card button,.dispatch button{cursor:pointer;background:var(--surface);color:var(--text);border:1px solid var(--line-strong);border-radius:.45rem;padding:.65rem .9rem;margin-top:.5rem}
+@keyframes arrive{from{opacity:.1;transform:translateY(14px)}}
+.dispatch{position:relative;display:grid;grid-template-columns:1fr 1.25fr;gap:2rem;margin:5rem 0 1rem;padding:clamp(1.2rem,4vw,3rem);background:var(--bg-elevated);border:1px solid var(--line-strong);border-radius:1.2rem;scroll-margin-top:6rem}
+.dispatch h2{font-size:clamp(2rem,4vw,3.8rem);line-height:1.05;margin:.6rem 0}
+.dispatch-board{min-width:0;padding:1rem;background:var(--bg);border:1px solid var(--line);border-radius:.7rem}
+.dispatch-readout,.dispatch-stations{display:flex;justify-content:space-between;gap:.3rem;flex-wrap:wrap}
+.dispatch-readout{font-size:.78rem;color:var(--accent)}
+.dispatch-road{position:relative;overflow:hidden;margin:1.1rem 0;border-bottom:2px dashed var(--line-strong);height:2.2rem}
+.dispatch-road span{display:inline-block;position:relative;color:var(--accent);font:700 1rem var(--mono)}
+@media(prefers-reduced-motion:no-preference){.dispatch-road span{animation:drive 3.6s linear infinite}@keyframes drive{from{left:0}to{left:85%}}}
+.dispatch-stations button{flex:1}.dispatch-stations button:is(.demo-dock,:hover,:focus-visible){border-color:var(--accent);color:var(--accent)}
+.repo-shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));gap:1rem;margin:1.5rem 0}
+.repo-shelf article{padding:1.4rem;border-top:2px solid var(--accent);background:var(--bg-elevated)}.repo-shelf h3{margin:.6rem 0}.repo-shelf a{color:var(--accent);text-decoration:underline}.repo-shelf p{margin-bottom:1rem}
+@media(max-width:760px){.dispatch{grid-template-columns:1fr;gap:1rem}}
 .project-shot { display:block; width:100%; height:auto; aspect-ratio:1152/800; background:var(--bg); border-bottom:1px solid var(--line); }
 .charge-demo { margin-top:1rem; border-top:1px solid var(--line); padding:1rem 0; }
 .charge-demo summary { cursor:pointer; color:var(--accent); font-weight:700; }
