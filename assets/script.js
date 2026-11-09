@@ -1,6 +1,7 @@
 (() => {
   const root = document.documentElement;
   const themeToggle = document.querySelector('.theme-toggle');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const storage = {
     get(key) { try { return window.localStorage.getItem(key); } catch { return null; } },
     set(key, value) { try { window.localStorage.setItem(key, value); } catch { /* Storage may be blocked in local preview. */ } }
@@ -8,8 +9,18 @@
   const savedTheme = storage.get('msh-theme');
   root.dataset.theme = savedTheme || 'dark';
   themeToggle?.addEventListener('click', () => {
-    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    storage.set('msh-theme', root.dataset.theme);
+    const applyTheme = () => {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      storage.set('msh-theme', root.dataset.theme);
+    };
+    if (reducedMotion || !document.startViewTransition) {
+      applyTheme();
+      return;
+    }
+    const bounds = themeToggle.getBoundingClientRect();
+    root.style.setProperty('--theme-x', bounds.left + bounds.width / 2 + 'px');
+    root.style.setProperty('--theme-y', bounds.top + bounds.height / 2 + 'px');
+    document.startViewTransition(applyTheme);
   });
 
   const menuToggle = document.querySelector('.menu-toggle');
@@ -27,7 +38,6 @@
   });
   navLinks?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
 
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const typingText = document.getElementById('typing-text');
   if (typingText) {
     const hour = Number(new Intl.DateTimeFormat('en-GB', {hour: '2-digit', hourCycle: 'h23', timeZone: 'Asia/Dhaka'}).format(new Date()));
@@ -69,14 +79,41 @@
   const filterButtons = document.querySelectorAll('.filter-button');
   const projectCards = document.querySelectorAll('.project-card');
   filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
+      if (button.classList.contains('active')) return;
+      const carousel = document.querySelector('#project-carousel');
+      if (!reducedMotion) {
+        await carousel.animate(
+          [{ opacity: 1, transform: 'translateX(0)' }, { opacity: 0, transform: 'translateX(18px)' }],
+          { duration: 160, easing: 'ease-in', fill: 'forwards' }
+        ).finished;
+      }
       filterButtons.forEach((item) => item.classList.remove('active'));
+      filterButtons.forEach((item) => item.setAttribute('aria-selected', 'false'));
       button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
       const filter = button.dataset.filter;
       projectCards.forEach((card) => {
         const categories = card.dataset.category?.split(' ') || [];
         card.classList.toggle('hidden', filter !== 'all' && !categories.includes(filter));
       });
+      carousel.scrollLeft = 0;
+      if (!reducedMotion) {
+        carousel.animate(
+          [{ opacity: 0, transform: 'translateX(-18px)' }, { opacity: 1, transform: 'translateX(0)' }],
+          { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'both' }
+        );
+      }
+    });
+  });
+  filterButtons.forEach((button, index) => {
+    button.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      const direction = event.key === 'ArrowRight' ? 1 : -1;
+      const next = (index + direction + filterButtons.length) % filterButtons.length;
+      filterButtons[next].focus();
+      filterButtons[next].click();
+      event.preventDefault();
     });
   });
 

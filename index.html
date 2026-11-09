@@ -18,6 +18,7 @@
   <script defer src="assets/bug-blaster.js"></script>
   <script defer src="assets/script.js"></script>
   <script defer src="assets/dispatch.js"></script>
+  <script defer src="assets/effects.js"></script>
 </head>
 <body>
   <div id="arrival" hidden><div class="arrival-card"><small>DHAKA · BANGLADESH</small><strong lang="bn">স্বাগতম</strong><p>Welcome to Likhon’s portfolio.</p><button type="button">Enter portfolio →</button></div></div>
@@ -27,7 +28,7 @@
 
   <header class="site-header" id="top">
     <nav class="nav-shell" aria-label="Primary navigation">
-      <a class="brand" href="#home" aria-label="Go to home">
+      <a class="brand" href="#home">
         <span class="brand-mark">MSH</span>
         <span class="brand-text">LIKHON<span class="blink-dot">_</span></span>
       </a>
@@ -56,6 +57,7 @@
 
   <main id="main-content">
     <section class="hero section" id="home">
+      <canvas class="particle-field" id="particle-field" aria-hidden="true"></canvas>
       <div class="hero-grid">
         <div class="hero-copy reveal">
           <p class="eyebrow"><span class="status-dot"></span> PERSONAL PORTFOLIO / DHAKA, BANGLADESH</p>
@@ -137,15 +139,21 @@
         <p>Selected GitHub projects exploring service coordination, information management, and learning tools, alongside my academic work.</p>
       </div>
 
-      <div class="filter-bar reveal" role="group" aria-label="Filter projects">
-        <button class="filter-button active" type="button" data-filter="all">All</button>
-        <button class="filter-button" type="button" data-filter="software">Software</button>
-        <button class="filter-button" type="button" data-filter="database">Database</button>
-        <button class="filter-button" type="button" data-filter="hardware">Hardware</button>
+      <div class="filter-bar reveal">
+        <span class="filter-tabs" role="tablist" aria-label="Filter projects">
+          <button class="filter-button active" type="button" role="tab" aria-controls="project-carousel" aria-selected="true" data-filter="all">All</button>
+          <button class="filter-button" type="button" role="tab" aria-controls="project-carousel" aria-selected="false" data-filter="software">Software</button>
+          <button class="filter-button" type="button" role="tab" aria-controls="project-carousel" aria-selected="false" data-filter="database">Database</button>
+          <button class="filter-button" type="button" role="tab" aria-controls="project-carousel" aria-selected="false" data-filter="hardware">Hardware</button>
+        </span>
+        <span class="carousel-actions" aria-label="Move through projects">
+          <button type="button" id="projects-prev" aria-label="Previous projects">←</button>
+          <button type="button" id="projects-next" aria-label="Next projects">→</button>
+        </span>
       </div>
 
-      <div class="projects-grid">
-        <article class="project-card project-featured reveal" data-category="software database">
+      <div class="projects-grid" id="project-carousel" tabindex="0" aria-label="Projects. Drag horizontally or use the arrow buttons.">
+        <article class="project-card project-featured reveal isometric-card" data-category="software database">
           <div class="project-visual chargebd-visual" aria-hidden="true">
             <div class="map-grid"></div>
             <div class="charge-route route-a"></div><div class="charge-route route-b"></div>
@@ -420,9 +428,9 @@
       <p>Designed and built for Md. Shyed Hasan Likhon.</p>
     </div>
     <p>© <span id="current-year">2026</span> Md. Shyed Hasan Likhon. All rights reserved.</p>
-    <a href="#top">Back to top ↑</a>
   </footer>
 
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top"><span>Back to top</span> ↑</button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
