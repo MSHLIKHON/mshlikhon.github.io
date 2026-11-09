@@ -29,7 +29,7 @@
   <header class="site-header" id="top">
     <nav class="nav-shell" aria-label="Primary navigation">
       <a class="brand" href="#home">
-        <span class="brand-mark">MSH</span>
+        <span class="brand-mark"><img src="assets/avatar.jpg" alt="" width="160" height="160"></span>
         <span class="brand-text">LIKHON<span class="blink-dot">_</span></span>
       </a>
 
@@ -152,7 +152,7 @@
         </span>
       </div>
 
-      <div class="projects-grid" id="project-carousel" tabindex="0" aria-label="Projects. Drag horizontally or use the arrow buttons.">
+      <div class="projects-grid" id="project-carousel" data-drag-carousel tabindex="0" aria-label="Projects. Drag horizontally or use the arrow buttons.">
         <article class="project-card project-featured reveal isometric-card" data-category="software database">
           <div class="project-visual chargebd-visual" aria-hidden="true">
             <div class="map-grid"></div>
@@ -351,7 +351,7 @@
         <p>Leadership, volunteering, event support, and community service are important parts of my development.</p>
       </div>
 
-      <div class="leadership-grid">
+      <div class="leadership-grid drag-carousel" id="leadership-carousel" data-drag-carousel tabindex="0" aria-label="Leadership experience. Drag horizontally to explore.">
         <article class="leadership-card reveal">
           <p class="role-time">August 2017 — February 2018</p>
           <h3>General Secretary</h3>
@@ -393,6 +393,7 @@
     </section>
 
     <section class="section contact-section" id="contact">
+      <canvas class="particle-field particle-field-contact" aria-hidden="true"></canvas>
       <div class="contact-shell reveal">
         <div class="contact-copy">
           <p class="section-index">06 // CONTACT</p>
@@ -424,7 +425,7 @@
 
   <footer class="site-footer">
     <div>
-      <a class="brand footer-brand" href="#top"><span class="brand-mark">MSH</span><span class="brand-text">LIKHON_</span></a>
+      <a class="brand footer-brand" href="#top"><span class="brand-mark"><img src="assets/avatar.jpg" alt="" width="160" height="160"></span><span class="brand-text">LIKHON_</span></a>
       <p>Designed and built for Md. Shyed Hasan Likhon.</p>
     </div>
     <p>© <span id="current-year">2026</span> Md. Shyed Hasan Likhon. All rights reserved.</p>

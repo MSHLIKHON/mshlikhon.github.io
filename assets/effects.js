@@ -1,17 +1,15 @@
 (() => {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const canvas = document.querySelector('#particle-field');
-  const hero = document.querySelector('#home');
-  if (canvas && hero) {
+  document.querySelectorAll('.particle-field').forEach(canvas => {
+    const host = canvas.closest('section');
     const context = canvas.getContext('2d');
     const pointer = { x: -1000, y: -1000 };
     let dots = [];
-    let frame = 0;
-    let active = true;
+    let active = false;
 
     function resizeParticles() {
-      const bounds = hero.getBoundingClientRect();
+      const bounds = host.getBoundingClientRect();
       const ratio = Math.min(devicePixelRatio || 1, 2);
       canvas.width = Math.round(bounds.width * ratio);
       canvas.height = Math.round(bounds.height * ratio);
@@ -19,7 +17,7 @@
       canvas.style.height = bounds.height + 'px';
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
       dots = [];
-      const gap = innerWidth < 680 ? 34 : 30;
+      const gap = innerWidth < 680 ? 42 : 38;
       for (let y = gap / 2; y < bounds.height; y += gap) {
         for (let x = gap / 2; x < bounds.width; x += gap) dots.push({ x, y });
       }
@@ -47,33 +45,31 @@
         context.fill();
       }
       context.globalAlpha = 1;
-      if (active && !reducedMotion) frame = requestAnimationFrame(drawParticles);
     }
 
-    hero.addEventListener('pointermove', event => {
-      const bounds = hero.getBoundingClientRect();
+    host.addEventListener('pointermove', event => {
+      const bounds = host.getBoundingClientRect();
       pointer.x = event.clientX - bounds.left;
       pointer.y = event.clientY - bounds.top;
+      if (active && !reducedMotion) drawParticles();
     });
-    hero.addEventListener('pointerleave', () => {
+    host.addEventListener('pointerleave', () => {
       pointer.x = -1000;
       pointer.y = -1000;
+      if (active) drawParticles();
     });
     new ResizeObserver(() => {
       resizeParticles();
-      if (reducedMotion) drawParticles();
-    }).observe(hero);
+      if (active) drawParticles();
+    }).observe(host);
     new IntersectionObserver(([entry]) => {
       active = entry.isIntersecting;
-      cancelAnimationFrame(frame);
       if (active) drawParticles();
-    }).observe(hero);
+    }).observe(host);
     resizeParticles();
-    drawParticles();
-  }
+  });
 
-  const carousel = document.querySelector('#project-carousel');
-  if (carousel) {
+  function enableDragCarousel(carousel) {
     let dragging = false;
     let startX = 0;
     let startScroll = 0;
@@ -96,23 +92,28 @@
     carousel.addEventListener('pointerup', stopDrag);
     carousel.addEventListener('pointercancel', stopDrag);
 
-    const scrollAmount = () => Math.min(carousel.clientWidth * .78, 680);
-    document.querySelector('#projects-prev')?.addEventListener('click', () => {
-      carousel.scrollBy({ left: -scrollAmount(), behavior: reducedMotion ? 'auto' : 'smooth' });
-    });
-    document.querySelector('#projects-next')?.addEventListener('click', () => {
-      carousel.scrollBy({ left: scrollAmount(), behavior: reducedMotion ? 'auto' : 'smooth' });
-    });
+    if (carousel.id === 'project-carousel') {
+      const scrollAmount = () => Math.min(carousel.clientWidth * .78, 680);
+      document.querySelector('#projects-prev')?.addEventListener('click', () => {
+        carousel.scrollBy({ left: -scrollAmount(), behavior: reducedMotion ? 'auto' : 'smooth' });
+      });
+      document.querySelector('#projects-next')?.addEventListener('click', () => {
+        carousel.scrollBy({ left: scrollAmount(), behavior: reducedMotion ? 'auto' : 'smooth' });
+      });
+    }
   }
+  document.querySelectorAll('[data-drag-carousel]').forEach(enableDragCarousel);
 
   if (!reducedMotion && matchMedia('(hover:hover) and (pointer:fine)').matches) {
-    document.querySelectorAll('.isometric-card').forEach(card => {
+    document.querySelectorAll('.isometric-card, .skill-card, .repo-shelf article, .leadership-card').forEach(card => {
+      card.classList.add('tilt-card');
       card.addEventListener('pointermove', event => {
         const bounds = card.getBoundingClientRect();
         const x = (event.clientX - bounds.left) / bounds.width - .5;
         const y = (event.clientY - bounds.top) / bounds.height - .5;
-        card.style.setProperty('--tilt-x', (-y * 4).toFixed(2) + 'deg');
-        card.style.setProperty('--tilt-y', (x * 5).toFixed(2) + 'deg');
+        const strength = card.classList.contains('project-featured') ? 5 : 2.5;
+        card.style.setProperty('--tilt-x', (-y * strength).toFixed(2) + 'deg');
+        card.style.setProperty('--tilt-y', (x * strength).toFixed(2) + 'deg');
       });
       card.addEventListener('pointerleave', () => {
         card.style.setProperty('--tilt-x', '0deg');
