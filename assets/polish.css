@@ -196,3 +196,111 @@
 @media (prefers-reduced-motion:no-preference){.hero-portrait img{animation:portrait-float 5.5s ease-in-out infinite}.portrait-halo{animation:portrait-glow 4s ease-in-out infinite}}
 @keyframes portrait-float{50%{transform:translateY(-10px) rotate(.35deg)}}
 @keyframes portrait-glow{50%{opacity:.55;transform:scale(1.06)}}
+
+/* Premium surface pass — keep the terminal-green identity, refine the material system. */
+:root{
+  --bg:#090c0d;
+  --bg-elevated:#0f1413;
+  --bg-card:rgba(18,24,22,.68);
+  --surface:#141b19;
+  --surface-strong:#1a2421;
+  --text:#f1f7f4;
+  --muted:#9aa8a2;
+  --faint:#6e7b76;
+  --line:rgba(225,240,233,.09);
+  --line-strong:rgba(114,246,177,.24);
+  --shadow:0 24px 80px rgba(0,0,0,.42);
+  --radius:18px;
+}
+html[data-theme="light"]{
+  --bg:#f4f6f5;
+  --bg-elevated:#fbfcfb;
+  --bg-card:rgba(255,255,255,.72);
+  --surface:#e9eeeb;
+  --surface-strong:#dfe8e3;
+  --text:#101714;
+  --muted:#56645e;
+  --faint:#77847f;
+  --line:rgba(18,37,29,.1);
+  --line-strong:rgba(8,121,75,.22);
+  --shadow:0 24px 70px rgba(30,50,41,.12);
+}
+body{
+  line-height:1.68;
+  background:
+    radial-gradient(circle at 12% 8%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 30rem),
+    radial-gradient(circle at 88% 28%,rgba(76,118,255,.055),transparent 32rem),
+    var(--bg);
+}
+body::before{background-size:72px 72px;opacity:.58}
+.site-header{
+  background:color-mix(in srgb,var(--bg) 76%,transparent);
+  border-color:color-mix(in srgb,var(--line) 82%,transparent);
+  box-shadow:0 1px 0 rgba(255,255,255,.015);
+  backdrop-filter:blur(22px) saturate(120%);
+  -webkit-backdrop-filter:blur(22px) saturate(120%);
+}
+.nav-shell{height:80px}
+.nav-links a{font-size:.72rem;letter-spacing:.095em}
+.section{padding-block:clamp(88px,10vw,136px)}
+.section + .section{border-top:1px solid var(--line)}
+.section-heading{margin-bottom:clamp(40px,6vw,68px)}
+.section-heading h2,.contact-copy h2{
+  font-size:clamp(2.55rem,5vw,4.75rem);
+  letter-spacing:-.06em;
+  text-wrap:balance;
+}
+.section-heading>p:last-child,.contact-copy>p,.hero-summary{font-size:clamp(.97rem,1.25vw,1.06rem);line-height:1.82}
+.about-grid,.skills-grid,.projects-grid,.leadership-grid{gap:clamp(16px,2vw,24px)}
+.about-card,.focus-card,.skill-card,.project-card,.leadership-card,.contact-shell,
+.dispatch,.repo-shelf article,.bug-console,.stats-grid article{
+  border-color:var(--line);
+  background:linear-gradient(145deg,color-mix(in srgb,var(--bg-card) 92%,transparent),color-mix(in srgb,var(--bg-elevated) 76%,transparent));
+  box-shadow:0 1px 0 rgba(255,255,255,.025),0 18px 55px rgba(0,0,0,.16);
+  backdrop-filter:blur(16px) saturate(115%);
+  -webkit-backdrop-filter:blur(16px) saturate(115%);
+}
+.about-card,.focus-card,.skill-card,.project-card,.leadership-card{border-radius:14px}
+.contact-shell,.dispatch{border-radius:20px}
+.skill-card,.project-card,.leadership-card,.about-card,.focus-card,.repo-shelf article{
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s ease,box-shadow .35s ease,background-color .35s ease;
+}
+.button,.filter-button,.carousel-actions button,.theme-toggle,.menu-toggle,.copy-email,.contact-list a,
+.social-row a,.repo-shelf a,.project-links a{
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),color .24s ease,border-color .24s ease,background-color .24s ease,box-shadow .28s ease,opacity .24s ease;
+}
+.button{min-height:48px;border-radius:11px;padding-inline:22px}
+.button-primary{box-shadow:0 10px 30px color-mix(in srgb,var(--accent) 13%,transparent)}
+.button-secondary{background:color-mix(in srgb,var(--bg-card) 88%,transparent)}
+.tag-cloud span{border-radius:999px;background:color-mix(in srgb,var(--surface) 76%,transparent)}
+.filter-button{border-radius:999px;padding:.62rem 1rem}
+.contact-form input,.contact-form textarea{
+  border-radius:12px;
+  background:color-mix(in srgb,var(--bg) 62%,transparent);
+  transition:border-color .24s ease,box-shadow .24s ease,background-color .24s ease;
+}
+.contact-form input:hover,.contact-form textarea:hover{border-color:color-mix(in srgb,var(--accent) 28%,var(--line))}
+.identity-print{border-width:1px;border-radius:14px;overflow:hidden;box-shadow:8px 8px 0 color-mix(in srgb,var(--accent) 72%,transparent)}
+.identity-print figcaption{border-top-width:1px}
+.project-meta::before{border-bottom-width:1px}
+
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .skill-card:hover,.project-card:hover,.leadership-card:hover,.about-card:hover,.focus-card:hover,.repo-shelf article:hover{
+    border-color:var(--line-strong);
+    box-shadow:0 1px 0 rgba(255,255,255,.04),0 24px 70px rgba(0,0,0,.26);
+  }
+  .button:hover{transform:translateY(-2px)}
+  .button:active,.filter-button:active,.carousel-actions button:active{transform:translateY(0) scale(.98)}
+  .social-row a:hover,.project-links a:hover,.repo-shelf a:hover{transform:translateY(-1px)}
+  .theme-toggle:hover,.menu-toggle:hover,.carousel-actions button:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.22)}
+}
+@media(max-width:680px){
+  .nav-shell{height:72px;width:min(100% - 28px,1180px)}
+  .section{width:min(100% - 28px,1180px);padding-block:78px}
+  .section-heading{margin-bottom:36px}
+  .section-heading h2,.contact-copy h2{font-size:clamp(2.35rem,13vw,3.6rem)}
+  .about-card,.focus-card,.skill-card,.project-card,.leadership-card{border-radius:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .skill-card,.project-card,.leadership-card,.about-card,.focus-card,.repo-shelf article,.button,.filter-button,.carousel-actions button,.theme-toggle,.menu-toggle{transition-duration:.01ms!important}
+}
