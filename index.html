@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="stylesheet" href="assets/polish.css" />
   <script defer src="assets/bug-blaster.js"></script>
-  <script defer src="assets/script.js"></script>
+  <script defer src="assets/script.js?v=20261112-2"></script>
   <script defer src="assets/dispatch.js"></script>
   <script defer src="assets/effects.js"></script>
   <script type="application/ld+json">
@@ -315,40 +315,30 @@
       <div class="section-heading reveal">
         <p class="section-index">03 // SKILLS</p>
         <h2>Technical <span>toolkit.</span></h2>
-        <p>A categorized view of the languages, interface tools, databases, platforms, and systems I use while learning and building projects.</p>
+        <p>Tools I use while learning and building—grouped by where they fit in my workflow, with honest proficiency states instead of arbitrary percentages.</p>
       </div>
 
-      <div class="skills-grid">
-        <article class="skill-card reveal">
-          <div class="skill-icon">LANG</div>
-          <h3>Languages</h3><p>Used across academic exercises and the BloodBridge and Career Copilot prototypes.</p>
-          <div class="tag-cloud"><span>C · Comfortable</span><span>Python · Learning</span><span>PHP · Learning</span><span>Java · Learning</span><span>SQL · Learning</span></div>
-        </article>
-        <article class="skill-card reveal delay-1">
-          <div class="skill-icon">UI</div>
-          <h3>Frontend &amp; Interfaces</h3><p>Responsive portfolio interfaces and PHP/Streamlit prototype screens.</p>
-          <div class="tag-cloud"><span>HTML</span><span>CSS</span><span>JavaScript · Learning</span><span>Responsive UI</span><span>Canvas API</span></div>
-        </article>
-        <article class="skill-card reveal delay-2">
-          <div class="skill-icon">APP</div>
-          <h3>Frameworks &amp; App Tools</h3><p>Tools used to assemble and present working application prototypes.</p>
-          <div class="tag-cloud"><span>Streamlit · Learning</span><span>PHP Web Apps</span><span>FormSubmit</span><span>Figma</span></div>
-        </article>
-        <article class="skill-card reveal">
-          <div class="skill-icon">DB</div>
-          <h3>Databases &amp; Modeling</h3><p>Relational schemas for service workflows and emergency-resource records.</p>
-          <div class="tag-cloud"><span>MySQL</span><span>SQLite</span><span>ER Diagrams</span><span>Schema Design</span><span>Relationships</span></div>
-        </article>
-        <article class="skill-card reveal delay-1">
-          <div class="skill-icon">TOOL</div>
-          <h3>Tools &amp; Platforms</h3><p>Version control, development, planning, and productivity workflow.</p>
-          <div class="tag-cloud"><span>Git</span><span>GitHub</span><span>VS Code</span><span>Figma</span><span>Canva</span><span>Excel</span></div>
-        </article>
-        <article class="skill-card reveal delay-2">
-          <div class="skill-icon">NET</div>
-          <h3>Networking &amp; Systems</h3><p>Academic networking practice and foundations for system analysis.</p>
-          <div class="tag-cloud"><span>Cisco Packet Tracer</span><span>IP Addressing</span><span>Router Basics</span><span>Switch Basics</span><span>System Analysis</span></div>
-        </article>
+      <div class="skill-filters reveal" role="tablist" aria-label="Filter technical skills">
+        <button class="skill-filter active" type="button" role="tab" aria-selected="true" data-skill-filter="all">All skills</button>
+        <button class="skill-filter" type="button" role="tab" aria-selected="false" data-skill-filter="languages">Languages</button>
+        <button class="skill-filter" type="button" role="tab" aria-selected="false" data-skill-filter="frontend">Frontend</button>
+        <button class="skill-filter" type="button" role="tab" aria-selected="false" data-skill-filter="data">Data &amp; databases</button>
+        <button class="skill-filter" type="button" role="tab" aria-selected="false" data-skill-filter="tools">Tools &amp; systems</button>
+      </div>
+
+      <div class="skills-grid" id="skills-grid">
+        <article class="skill-card reveal" data-skill-category="languages" style="--skill-level:78%"><div class="skill-card-head"><div class="skill-icon">C</div><h3>C</h3><span>Comfortable</span></div><p>Programming fundamentals, problem solving, and academic exercises.</p><div class="skill-meter" aria-label="C proficiency: Comfortable"><span></span></div></article>
+        <article class="skill-card reveal delay-1" data-skill-category="languages" style="--skill-level:56%"><div class="skill-card-head"><div class="skill-icon">PY</div><h3>Python</h3><span>Learning</span></div><p>Career Copilot workflow, scripting, and application logic.</p><div class="skill-meter" aria-label="Python proficiency: Learning"><span></span></div></article>
+        <article class="skill-card reveal" data-skill-category="languages" style="--skill-level:54%"><div class="skill-card-head"><div class="skill-icon">PHP</div><h3>PHP</h3><span>Learning</span></div><p>Server-rendered interfaces and BloodBridge workflow screens.</p><div class="skill-meter" aria-label="PHP proficiency: Learning"><span></span></div></article>
+        <article class="skill-card reveal delay-1" data-skill-category="languages" style="--skill-level:52%"><div class="skill-card-head"><div class="skill-icon">JV</div><h3>Java</h3><span>Learning</span></div><p>Object-oriented design through Mayor’s Rise and coursework.</p><div class="skill-meter" aria-label="Java proficiency: Learning"><span></span></div></article>
+        <article class="skill-card reveal" data-skill-category="frontend" style="--skill-level:76%"><div class="skill-card-head"><div class="skill-icon">UI</div><h3>HTML &amp; CSS</h3><span>Comfortable</span></div><p>Responsive layouts, accessible structure, and visual systems.</p><div class="skill-meter" aria-label="HTML and CSS proficiency: Comfortable"><span></span></div></article>
+        <article class="skill-card reveal delay-1" data-skill-category="frontend" style="--skill-level:55%"><div class="skill-card-head"><div class="skill-icon">JS</div><h3>JavaScript</h3><span>Learning</span></div><p>Portfolio interactions, Canvas games, and UI behavior.</p><div class="skill-meter" aria-label="JavaScript proficiency: Learning"><span></span></div></article>
+        <article class="skill-card reveal" data-skill-category="data" style="--skill-level:61%"><div class="skill-card-head"><div class="skill-icon">SQL</div><h3>MySQL &amp; SQL</h3><span>Learning</span></div><p>Relational queries, schemas, and service-workflow data.</p><div class="skill-meter" aria-label="MySQL and SQL proficiency: Learning"><span></span></div></article>
+        <article class="skill-card reveal delay-1" data-skill-category="data" style="--skill-level:48%"><div class="skill-card-head"><div class="skill-icon">ER</div><h3>Data modeling</h3><span>Foundation</span></div><p>ER diagrams, relationships, normalization, and schema design.</p><div class="skill-meter" aria-label="Data modeling proficiency: Foundation"><span></span></div></article>
+        <article class="skill-card reveal" data-skill-category="tools" style="--skill-level:72%"><div class="skill-card-head"><div class="skill-icon">GIT</div><h3>Git &amp; GitHub</h3><span>Comfortable</span></div><p>Version control, repositories, commits, and project publishing.</p><div class="skill-meter" aria-label="Git and GitHub proficiency: Comfortable"><span></span></div></article>
+        <article class="skill-card reveal delay-1" data-skill-category="tools" style="--skill-level:58%"><div class="skill-card-head"><div class="skill-icon">UX</div><h3>Figma &amp; UI tools</h3><span>Learning</span></div><p>Wireframes, visual planning, prototyping, and presentation.</p><div class="skill-meter" aria-label="Figma and UI tools proficiency: Learning"><span></span></div></article>
+        <article class="skill-card reveal" data-skill-category="tools" style="--skill-level:50%"><div class="skill-card-head"><div class="skill-icon">NET</div><h3>Networking</h3><span>Foundation</span></div><p>Packet Tracer, IP addressing, routers, and switches.</p><div class="skill-meter" aria-label="Networking proficiency: Foundation"><span></span></div></article>
+        <article class="skill-card reveal delay-1" data-skill-category="tools" style="--skill-level:46%"><div class="skill-card-head"><div class="skill-icon">APP</div><h3>Streamlit</h3><span>Learning</span></div><p>Rapid Python interfaces for the Career Copilot prototype.</p><div class="skill-meter" aria-label="Streamlit proficiency: Learning"><span></span></div></article>
       </div>
     </section>
 

@@ -345,8 +345,10 @@ pre { margin: 0; overflow-x: auto; color: var(--muted); font-family: var(--mono)
 
 /* Keep mobile content within the viewport, including intrinsic grid widths. */
 html { overflow-x: clip; }
+body, main, section { max-width: 100%; }
+img, video, canvas, svg { max-width: 100%; }
 .hero-grid > *, .about-grid > *, .contact-shell > *,
-.projects-grid > *, .timeline-item > *, .focus-item > * { min-width: 0; }
+.projects-grid > *, .skills-grid > *, .leadership-grid > *, .repo-shelf > *, .timeline-item > *, .focus-item > * { min-width: 0; }
 .contact-form input, .contact-form textarea { min-width: 0; }
 .project-meta, .project-links { flex-wrap: wrap; }
 .contact-list strong { overflow-wrap: anywhere; }

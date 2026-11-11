@@ -29,14 +29,43 @@
     menuToggle?.classList.remove('open');
     navLinks?.classList.remove('open');
     menuToggle?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
   };
 
   menuToggle?.addEventListener('click', () => {
     const isOpen = menuToggle.classList.toggle('open');
     navLinks?.classList.toggle('open', isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.classList.toggle('menu-open', isOpen);
   });
   navLinks?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
+  document.addEventListener('click', (event) => {
+    if (navLinks?.classList.contains('open') && !navLinks.contains(event.target) && !menuToggle?.contains(event.target)) closeMenu();
+  });
+  window.addEventListener('resize', () => { if (window.innerWidth > 980) closeMenu(); }, { passive: true });
+
+  const skillFilters = [...document.querySelectorAll('.skill-filter')];
+  const skillCards = [...document.querySelectorAll('.skill-card[data-skill-category]')];
+  const applySkillFilter = (button) => {
+    const category = button.dataset.skillFilter;
+    skillFilters.forEach(item => {
+      const selected = item === button;
+      item.classList.toggle('active', selected);
+      item.setAttribute('aria-selected', String(selected));
+    });
+    skillCards.forEach(card => card.hidden = category !== 'all' && card.dataset.skillCategory !== category);
+  };
+  skillFilters.forEach((button, index) => {
+    button.addEventListener('click', () => applySkillFilter(button));
+    button.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? skillFilters.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + skillFilters.length) % skillFilters.length;
+      skillFilters[next].focus();
+      applySkillFilter(skillFilters[next]);
+    });
+  });
 
   const typingText = document.getElementById('typing-text');
   if (typingText) {
