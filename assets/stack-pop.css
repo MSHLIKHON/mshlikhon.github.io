@@ -1,0 +1,58 @@
+.stack-pop {
+  margin: clamp(2rem, 5vw, 4rem) 0 1rem;
+  padding: clamp(1rem, 3vw, 1.65rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 1rem 2rem;
+  align-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+}
+.stack-pop-copy h2 { margin-bottom: .25rem; font-size: clamp(1.55rem, 4vw, 2.3rem); }
+.stack-pop-copy p { margin-bottom: .65rem; color: var(--muted); }
+#pop-target { color: var(--text); font-weight: 700; }
+.stack-pop-play {
+  padding: .8rem;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at 50% 100%, #253f3c, #0b1717 78%);
+  color: #e0fff2;
+}
+.stack-pop-score { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem; font: 700 .72rem var(--mono); }
+.stack-pop-orbs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: .45rem;
+  margin-top: .8rem;
+}
+.stack-pop-orbs button {
+  --orb: #8de5b5;
+  width: 100%;
+  max-width: 5rem;
+  min-height: 44px;
+  aspect-ratio: 1;
+  justify-self: center;
+  padding: .1rem;
+  border-radius: 50%;
+  border: 1px solid #ffffff85;
+  background: radial-gradient(circle at 32% 23%, #fff 0%, #fff9 9%, transparent 27%),
+    radial-gradient(circle at 37% 29%, var(--orb) 28%, #519283 75%, #294b4a);
+  box-shadow: inset 0 -5px 9px #122d4144, 0 5px 8px #0005;
+  color: #112923;
+  font: 800 clamp(.61rem, 1.2vw, .76rem) var(--sans);
+  cursor: pointer;
+}
+.stack-pop-orbs button:nth-child(2n) { --orb: #a9d3ff; }
+.stack-pop-orbs button:nth-child(3n) { --orb: #f1c4ef; }
+.stack-pop-orbs button:disabled { cursor: default; }
+.stack-pop-orbs button:active { scale: .93; }
+.stack-pop-orbs .pop-hit { outline: 3px solid #8effac; outline-offset: 2px; }
+.stack-pop-orbs .pop-miss { outline: 3px solid #ff9b9b; outline-offset: 2px; }
+@media (max-width: 760px) {
+  .stack-pop { grid-template-columns: minmax(0, 1fr); }
+  .stack-pop-orbs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .stack-pop-orbs button { max-width: 3.8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stack-pop-orbs button:active { scale: 1; }
+}

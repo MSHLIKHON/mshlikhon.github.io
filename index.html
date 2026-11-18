@@ -39,7 +39,8 @@
   <script defer src="assets/bug-blaster.js"></script>
   <script defer src="assets/script.js?v=20261112-2"></script>
   <script defer src="assets/dispatch.js"></script>
-  <script defer src="assets/gridlock.js"></script>
+  <link rel="stylesheet" href="assets/stack-pop.css">
+  <script defer src="assets/stack-pop.js"></script>
   <script defer src="assets/effects.js"></script>
   <script type="application/ld+json">
   {
@@ -118,7 +119,7 @@
             <a class="button button-secondary" href="resume.html">View Résumé <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="https://github.com/MSHLIKHON?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="#dispatch">Play Charge Dispatch ↓</a>
-            <a class="button button-secondary" href="#gridlock">Play Dhaka Gridlock ↓</a>
+            <a class="button button-secondary" href="#stack-pop">Play Stack Pop ↓</a>
           </div>
 
           <div class="social-row" aria-label="Social profiles">
@@ -138,20 +139,24 @@
         </figure>
       </div>
 
-      <section class="dispatch gridlock" id="gridlock" aria-labelledby="gridlock-title">
-        <div>
-          <p class="section-index">Dhaka Arcade</p>
-          <h2 id="gridlock-title">Dhaka Gridlock</h2>
-          <p>Turn the road tiles to connect Mirpur to Gulshan. You have 60 seconds from your first move. Finish fast and use fewer turns to beat your best.</p>
-          <button type="button" id="gridlock-next">New map ↻</button>
-          <p id="gridlock-status" role="status">Tap a tile or use Tab and Enter to turn it clockwise.</p>
+      <section class="stack-pop" id="stack-pop" aria-labelledby="stack-pop-title">
+        <div class="stack-pop-copy">
+          <h2 id="stack-pop-title">Stack Pop</h2>
+          <p>Match the tool shown below. Chain correct hits for bonus points.</p>
+          <p id="pop-target" role="status">Ready for a 20-second round?</p>
+          <button class="button button-primary" id="pop-start" type="button">Start round</button>
           <noscript>Enable JavaScript to play.</noscript>
         </div>
-        <div class="dispatch-board">
-          <div class="dispatch-readout"><span id="gridlock-time">60s</span><span id="gridlock-moves">0 moves</span><span id="gridlock-best">Best —</span></div>
-          <div class="gridlock-endpoint">Mirpur →</div>
-          <div class="gridlock-board" id="gridlock-board" role="group" aria-label="Road tiles, four rows by four columns"></div>
-          <div class="gridlock-endpoint gridlock-finish">→ Gulshan</div>
+        <div class="stack-pop-play">
+          <div class="stack-pop-score"><span id="pop-time">20s</span><span id="pop-score">Score 0</span><span id="pop-best">Best 0</span></div>
+          <div class="stack-pop-orbs" id="pop-orbs" role="group" aria-label="Choose a tool">
+            <button type="button" disabled>Python</button>
+            <button type="button" disabled>SQL</button>
+            <button type="button" disabled>Git</button>
+            <button type="button" disabled>JavaScript</button>
+            <button type="button" disabled>PHP</button>
+            <button type="button" disabled>Java</button>
+          </div>
         </div>
       </section>
       <div class="dispatch" id="dispatch">
