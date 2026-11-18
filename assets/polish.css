@@ -8,6 +8,15 @@
 .dispatch{position:relative;display:grid;grid-template-columns:1fr 1.25fr;gap:2rem;margin:5rem 0 1rem;padding:clamp(1.2rem,4vw,3rem);background:var(--bg-elevated);border:1px solid var(--line-strong);border-radius:1.2rem;scroll-margin-top:6rem}
 .dispatch h2{font-size:clamp(2rem,4vw,3.8rem);line-height:1.05;margin:.6rem 0}
 .dispatch-board{min-width:0;padding:1rem;background:var(--bg);border:1px solid var(--line);border-radius:.7rem}
+.gridlock{align-items:center}
+.gridlock #gridlock-status{margin:1rem 0 0;color:var(--muted)}
+.gridlock-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.35rem}
+.gridlock-board button{display:grid;place-items:center;aspect-ratio:1;min-width:0;margin:0;padding:0;font:clamp(1.5rem,5vw,3.3rem)/1 var(--mono);touch-action:manipulation}
+.gridlock-board button.connected{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.gridlock-board button:not(:disabled):hover{border-color:var(--accent)}
+.gridlock-board button:disabled{cursor:default}
+.gridlock-endpoint{margin:.5rem 0;color:var(--accent);font:.75rem var(--mono)}
+.gridlock-finish{text-align:right}
 .dispatch-readout,.dispatch-stations{display:flex;justify-content:space-between;gap:.3rem;flex-wrap:wrap}
 .dispatch-readout{font-size:.78rem;color:var(--accent)}
 .dispatch-road{position:relative;overflow:hidden;margin:1.1rem 0;border-bottom:2px dashed var(--line-strong);height:2.2rem}

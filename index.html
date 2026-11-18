@@ -38,6 +38,7 @@
   <script defer src="assets/bug-blaster.js"></script>
   <script defer src="assets/script.js?v=20261112-2"></script>
   <script defer src="assets/dispatch.js"></script>
+  <script defer src="assets/gridlock.js"></script>
   <script defer src="assets/effects.js"></script>
   <script type="application/ld+json">
   {
@@ -110,6 +111,7 @@
             <a class="button button-primary" href="#projects">Explore Projects <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="resume.html">View Résumé <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="#dispatch">Play Charge Dispatch ↓</a>
+            <a class="button button-secondary" href="#gridlock">Play Dhaka Gridlock ↓</a>
           </div>
 
           <div class="social-row" aria-label="Social profiles">
@@ -130,6 +132,22 @@
         </figure>
       </div>
 
+      <section class="dispatch gridlock" id="gridlock" aria-labelledby="gridlock-title">
+        <div>
+          <p class="section-index">Dhaka Arcade</p>
+          <h2 id="gridlock-title">Dhaka Gridlock</h2>
+          <p>Turn the road tiles to connect Mirpur to Gulshan. You have 60 seconds from your first move. Finish fast and use fewer turns to beat your best.</p>
+          <button type="button" id="gridlock-next">New map ↻</button>
+          <p id="gridlock-status" role="status">Tap a tile or use Tab and Enter to turn it clockwise.</p>
+          <noscript>Enable JavaScript to play.</noscript>
+        </div>
+        <div class="dispatch-board">
+          <div class="dispatch-readout"><span id="gridlock-time">60s</span><span id="gridlock-moves">0 moves</span><span id="gridlock-best">Best —</span></div>
+          <div class="gridlock-endpoint">Mirpur →</div>
+          <div class="gridlock-board" id="gridlock-board" role="group" aria-label="Road tiles, four rows by four columns"></div>
+          <div class="gridlock-endpoint gridlock-finish">→ Gulshan</div>
+        </div>
+      </section>
       <div class="dispatch" id="dispatch">
         <div><p class="section-index">CHARGEBD / ARCADE</p><h2>Charge Dispatch</h2><p>Route each EV to the station it requests. Hover over the matching station, tap it, or use Tab and Enter.</p></div>
         <div class="dispatch-board">
