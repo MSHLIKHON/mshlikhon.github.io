@@ -1,4 +1,4 @@
-.signal-card,.tool-orbit:not([hidden]){
+.tool-orbit:not([hidden]){
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);
   align-items:center;
@@ -8,25 +8,6 @@
   border-radius:var(--radius);
   background:var(--bg-card);
 }
-.signal-card{margin-top:2rem}
-.signal-card h2{margin-bottom:.45rem}
-.signal-card p,.tool-example p{color:var(--muted);margin-bottom:.75rem}
-#signal-result{margin:.7rem 0 0}
-.signal-console{background:#0a1915;color:#ebfff4;padding:.8rem;border-radius:12px}
-.signal-console .button{color:#ebfff4;background:#162b23}
-.signal-console .button:disabled{opacity:.65}
-.signal-readout,.signal-road{font:.75rem var(--mono)}
-.signal-readout{display:flex;justify-content:space-between;gap:.5rem;margin-bottom:.6rem}
-.signal-road{
-  display:grid;grid-template-columns:4.4rem 2.9rem minmax(0,1fr);align-items:center;gap:.3rem;
-  background:#192624;border-bottom:1px dashed #617569;min-height:44px;padding:.35rem;
-}
-.signal-road strong{color:#ffa7ab}
-.signal-road strong.go{color:#8ffbb4}
-.signal-traffic{position:relative;display:block;white-space:nowrap;overflow:hidden;font-size:.95rem}
-.signal-departure{position:absolute;top:0;left:0;animation:signal-drive .55s ease-in both}
-@keyframes signal-drive{from{left:25%;opacity:1}to{left:100%;opacity:.1}}
-#signal-switch{margin-top:.7rem}
 .tool-orbit{margin:0 0 2.5rem}
 .tool-orbs{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem}
 .tool-orbs button{
@@ -43,5 +24,5 @@
   .tool-orbs button:hover{transform:translateY(-4px)}
 }
 @media(max-width:680px){
-  .signal-card,.tool-orbit:not([hidden]){grid-template-columns:minmax(0,1fr)}
+  .tool-orbit:not([hidden]){grid-template-columns:minmax(0,1fr)}
 }

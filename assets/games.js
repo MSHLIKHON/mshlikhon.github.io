@@ -1,3 +1,25 @@
+function readBest(game) { try { return Number(localStorage.getItem('msh-arcade-' + game)) || 0; } catch { return 0; } }
+function saveBest(game, score) { try { localStorage.setItem('msh-arcade-' + game, score); } catch {} }
+(() => {
+  const tabs = [...document.querySelectorAll('[data-game]')];
+  function select(tab) {
+    tabs.forEach(item => { const selected = item === tab; item.setAttribute('aria-selected', selected); item.tabIndex = selected ? 0 : -1; document.getElementById(item.dataset.game).hidden = !selected; });
+    document.dispatchEvent(new Event('arcadechange'));
+  }
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('keydown', e => {
+      let next;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % tabs.length;
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i + tabs.length - 1) % tabs.length;
+      if (e.key === 'Home') next = 0;
+      if (e.key === 'End') next = tabs.length - 1;
+      if (next === undefined) return;
+      e.preventDefault(); select(tabs[next]); tabs[next].focus();
+    });
+  });
+})();
+
 function boardButtons(board, count, choose) {
   return Array.from({ length: count }, (_, index) => {
     const button = document.createElement('button');
@@ -18,7 +40,9 @@ function boardButtons(board, count, choose) {
 
   function render() {
     cells.forEach((cell, i) => {
-      cell.textContent = board[i] || '·';
+      cell.textContent = board[i] || '';
+      cell.dataset.mark = board[i];
+      cell.classList.toggle('winner', wins.some(line => line.includes(i) && line.every(n => board[n] && board[n] === board[i])));
       cell.setAttribute('aria-label', `Square ${i + 1}: ${board[i] || 'empty'}`);
       cell.setAttribute('aria-disabled', String(ended || busy || Boolean(board[i])));
     });
@@ -42,7 +66,19 @@ function boardButtons(board, count, choose) {
         return winsNow;
       });
     }
-    const choice = winningMove('O') ?? winningMove('X') ?? open[Math.floor(Math.random() * open.length)];
+    function minimax(mark, depth) {
+      if (winner('O')) return 10 - depth;
+      if (winner('X')) return depth - 10;
+      const free = available();
+      if (!free.length) return 0;
+      const scores = free.map(i => { board[i] = mark; const score = minimax(mark === 'O' ? 'X' : 'O', depth + 1); board[i] = ''; return score; });
+      return mark === 'O' ? Math.max(...scores) : Math.min(...scores);
+    }
+    let choice;
+    if (document.querySelector('#ttt-level').value === 'expert') {
+      let best = -Infinity;
+      open.forEach(i => { board[i] = 'O'; const score = minimax('X', 0); board[i] = ''; if (score > best) { best = score; choice = i; } });
+    } else choice = winningMove('O') ?? winningMove('X') ?? open[Math.floor(Math.random() * open.length)];
     board[choice] = 'O';
     busy = false;
     if (!finish('O')) status.textContent = 'Your turn.';
@@ -68,6 +104,7 @@ function boardButtons(board, count, choose) {
     render();
   }
   document.querySelector('#ttt-reset').addEventListener('click', reset);
+  document.querySelector('#ttt-level').addEventListener('change', reset);
   reset();
 })();
 
@@ -87,6 +124,8 @@ function boardButtons(board, count, choose) {
       cell.setAttribute('aria-disabled', String(shown || open.length === 2));
     });
     const pairs = matched.size / 2;
+    if (pairs === 6) { const best = readBest('memory'); if (!best || turns < best) saveBest('memory', turns); }
+    document.querySelector('#memory-best').textContent = `Best: ${readBest('memory') || '—'} turns`;
     status.textContent = pairs === 6 ? `All six pairs in ${turns} turns!` : `${turns} turns · ${pairs} of 6 pairs`;
   }
 
@@ -134,7 +173,11 @@ function boardButtons(board, count, choose) {
   const tile = canvas.width / size;
   const directions = { ArrowLeft: [-1,0], ArrowRight: [1,0], ArrowUp: [0,-1], ArrowDown: [0,1] };
   let body = [[4, 7], [3, 7], [2, 7]], food = [9, 7];
-  let direction, next, timer, score;
+  let direction, next, timer, score, paused = false, active = false;
+  const pause = document.querySelector('#snake-pause');
+  const speed = document.querySelector('#snake-speed');
+  const bestLabel = document.querySelector('#snake-best');
+  bestLabel.textContent = `Best: ${readBest('snake')}`;
   const same = (a, b) => a[0] === b[0] && a[1] === b[1];
 
   function paint() {
@@ -159,6 +202,7 @@ function boardButtons(board, count, choose) {
     timer = null;
     status.textContent = message;
     start.textContent = 'Play again';
+    active = false; pause.disabled = true; speed.disabled = false;
   }
 
   function tick() {
@@ -174,6 +218,8 @@ function boardButtons(board, count, choose) {
     if (!eats) body.pop();
     else {
       score++;
+      if (score > readBest('snake')) saveBest('snake', score);
+      bestLabel.textContent = `Best: ${readBest('snake')}`;
       const taken = new Set(body.map(([x, y]) => y * size + x));
       const free = Array.from({ length: size * size }, (_, i) => i).filter(i => !taken.has(i));
       const position = free[Math.floor(Math.random() * free.length)];
@@ -189,20 +235,32 @@ function boardButtons(board, count, choose) {
     const candidate = directions[key];
     if (candidate && !same(candidate, direction.map(n => -n))) next = candidate;
   }
+  function togglePause() {
+    if (!active) return;
+    paused = !paused;
+    clearInterval(timer); timer = paused ? null : setInterval(tick, Number(speed.value));
+    pause.textContent = paused ? 'Resume' : 'Pause';
+    status.textContent = paused ? `Paused · Score: ${score}` : `Score: ${score}`;
+  }
+  pause.addEventListener('click', togglePause);
   canvas.addEventListener('keydown', event => {
-    if (!timer || !directions[event.key]) return;
-    event.preventDefault();
-    turn(event.key);
+    const keys = {w:'ArrowUp',a:'ArrowLeft',s:'ArrowDown',d:'ArrowRight'};
+    const key = keys[event.key.toLowerCase()] || event.key;
+    if (key === ' ' && active) { event.preventDefault(); togglePause(); }
+    if (directions[key] && active) { event.preventDefault(); turn(key); }
   });
-  panel.querySelectorAll('[data-direction]').forEach(button => {
-    button.addEventListener('click', () => turn(button.dataset.direction));
+  let touch;
+  canvas.addEventListener('pointerdown', event => { touch = [event.clientX, event.clientY]; canvas.setPointerCapture(event.pointerId); });
+  canvas.addEventListener('pointerup', event => {
+    if (!touch) return;
+    const dx = event.clientX - touch[0], dy = event.clientY - touch[1]; touch = null;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 12) return;
+    turn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'ArrowRight' : 'ArrowLeft') : (dy > 0 ? 'ArrowDown' : 'ArrowUp'));
   });
-  panel.addEventListener('toggle', () => {
-    if (!panel.open && timer) stop(`Round ended. ${score} cells collected.`);
-  });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden && timer) stop(`Round ended. ${score} cells collected.`);
-  });
+  panel.querySelectorAll('[data-direction]').forEach(button => button.addEventListener('click', () => turn(button.dataset.direction)));
+  function autoPause() { if (active && !paused && (document.hidden || panel.hidden)) togglePause(); }
+  document.addEventListener('visibilitychange', autoPause);
+  document.addEventListener('arcadechange', autoPause);
   start.addEventListener('click', () => {
     clearInterval(timer);
     body = [[4, 7], [3, 7], [2, 7]];
@@ -212,7 +270,8 @@ function boardButtons(board, count, choose) {
     status.textContent = 'Score: 0';
     start.textContent = 'Restart Snake';
     paint();
-    timer = setInterval(tick, 180);
+    active = true; paused = false; pause.disabled = false; pause.textContent = 'Pause'; speed.disabled = true;
+    timer = setInterval(tick, Number(speed.value));
     canvas.focus({ preventScroll: true });
   });
   paint();
@@ -244,4 +303,74 @@ function boardButtons(board, count, choose) {
     update();
   });
   update();
+})();
+
+(() => {
+  const panel = document.querySelector('#ev-game');
+  const start = document.querySelector('#ev-start');
+  const pause = document.querySelector('#ev-pause');
+  const status = document.querySelector('#ev-status');
+  const clock = document.querySelector('#ev-clock');
+  const score = document.querySelector('#ev-score');
+  let bays, selected = 0, remaining = 45, charged = 0, missed = 0, active = false, paused = false, last = 0;
+  const buttons = boardButtons(document.querySelector('#ev-bays'), 3, select);
+  const newCar = () => ({ battery: 15 + Math.random() * 25, patience: 12 + Math.random() * 9 });
+  buttons.forEach((button, i) => {
+    button.innerHTML = `<small>BAY 0${i + 1}</small><span class="ev-car" aria-hidden="true">🚙</span><strong></strong><span class="battery" aria-hidden="true"><i></i></span><small class="patience"></small>`;
+  });
+  function render() {
+    buttons.forEach((button, i) => {
+      const car = bays[i];
+      button.classList.toggle('active', selected === i);
+      button.setAttribute('aria-pressed', String(selected === i));
+      button.disabled = !active || paused;
+      button.querySelector('strong').textContent = `${Math.floor(car.battery)}%`;
+      button.querySelector('i').style.width = `${car.battery}%`;
+      const patience = button.querySelector('.patience');
+      patience.textContent = `${Math.ceil(car.patience)}s left${selected === i ? ' ⚡' : ''}`;
+      patience.classList.toggle('urgent', car.patience < 5);
+      button.setAttribute('aria-label', `Bay ${i + 1}, ${Math.floor(car.battery)} percent charged, ${Math.ceil(car.patience)} seconds left${selected === i ? ', charging' : ''}`);
+    });
+    clock.textContent = `${Math.ceil(remaining)}s ${paused ? '· paused' : 'remaining'}`;
+    score.textContent = `${charged} charged · ${missed} missed`;
+  }
+  function select(i) { if (active && !paused) { selected = i; render(); } }
+  function togglePause() {
+    if (!active) return;
+    paused = !paused; last = performance.now();
+    pause.textContent = paused ? 'Resume' : 'Pause';
+    status.textContent = paused ? 'Round paused. Resume when you’re ready.' : `Power routed to bay ${selected + 1}.`;
+    render();
+  }
+  start.addEventListener('click', () => {
+    bays = Array.from({length:3}, newCar); remaining = 45; charged = missed = selected = 0;
+    active = true; paused = false; last = performance.now();
+    start.textContent = 'Restart round'; pause.disabled = false; pause.textContent = 'Pause';
+    status.textContent = 'Bay 1 is charging. Watch the other drivers’ countdowns.';
+    render(); buttons[0].focus({preventScroll:true});
+  });
+  pause.addEventListener('click', togglePause);
+  panel.addEventListener('keydown', e => { if (['1','2','3'].includes(e.key)) { e.preventDefault(); select(Number(e.key) - 1); } });
+  function autoPause() { if (active && !paused && (document.hidden || panel.hidden)) togglePause(); }
+  document.addEventListener('visibilitychange', autoPause);
+  document.addEventListener('arcadechange', autoPause);
+  setInterval(() => {
+    const now = performance.now();
+    if (!active || paused) { last = now; return; }
+    const dt = Math.min((now - last) / 1000, .5); last = now;
+    remaining = Math.max(0, remaining - dt);
+    bays.forEach((car, i) => {
+      car.patience -= dt;
+      if (i === selected) car.battery = Math.min(100, car.battery + dt * 24);
+      if (car.battery >= 100) { charged++; bays[i] = newCar(); status.textContent = `EV charged at bay ${i + 1}. Next driver is ready!`; }
+      else if (car.patience <= 0) { missed++; bays[i] = newCar(); status.textContent = `A driver left bay ${i + 1}. Keep an eye on the countdowns.`; }
+    });
+    if (!remaining) {
+      active = false; pause.disabled = true; start.textContent = 'Play again';
+      if (charged > readBest('ev')) saveBest('ev', charged);
+      status.textContent = `Shift complete! ${charged} EVs charged, ${missed} missed. Personal best: ${readBest('ev')}.`;
+    }
+    render();
+  }, 100);
+  bays = Array.from({length:3}, newCar); render();
 })();
