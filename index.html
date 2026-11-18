@@ -36,6 +36,8 @@
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="stylesheet" href="assets/polish.css?v=showcase" />
   <script defer src="assets/intro.js"></script>
+  <link rel="stylesheet" href="assets/playground.css">
+  <script defer src="assets/playground.js"></script>
   <script defer src="assets/script.js?v=20261112-2"></script>
   <script defer src="assets/effects.js"></script>
   <script type="application/ld+json">
@@ -138,6 +140,20 @@
         <article><strong>2027</strong><span>Expected Graduation</span></article>
         <article><strong>5+</strong><span>Academic Projects</span></article>
       </div>
+      <section class="signal-card" aria-labelledby="signal-title">
+        <div>
+          <h2 id="signal-title">Dhaka Signal Control</h2>
+          <p>Switch the green light to clear both queues. How many can you get through in 30 seconds?</p>
+          <button type="button" class="button button-primary" id="signal-start">Take control</button>
+          <p id="signal-result" role="status">Autopilot is showing how it works.</p>
+        </div>
+        <div class="signal-console">
+          <div class="signal-readout"><span id="signal-clock">Autopilot</span><span id="signal-score">0 passed</span></div>
+          <div class="signal-road"><span>Mirpur</span><strong id="signal-light-0">Green</strong><span class="signal-traffic" id="signal-queue-0"></span></div>
+          <div class="signal-road"><span>Gulshan</span><strong id="signal-light-1">Red</strong><span class="signal-traffic" id="signal-queue-1"></span></div>
+          <button type="button" class="button button-secondary" id="signal-switch" disabled>Switch signal</button>
+        </div>
+      </section>
     </section>
 
     <section class="section" id="about">
@@ -259,6 +275,19 @@
         <p>Tools I use while learning and building—grouped by where they fit in my workflow, with honest proficiency states instead of arbitrary percentages.</p>
       </div>
 
+      <div class="tool-orbit" id="tool-orbit" hidden>
+        <div class="tool-orbs" role="group" aria-label="Explore tools used in projects">
+          <button type="button" data-tool="python" aria-pressed="true">Python</button>
+          <button type="button" data-tool="sql" aria-pressed="false">SQL</button>
+          <button type="button" data-tool="php" aria-pressed="false">PHP</button>
+          <button type="button" data-tool="js" aria-pressed="false">JS</button>
+          <button type="button" data-tool="git" aria-pressed="false">Git</button>
+        </div>
+        <div class="tool-example">
+          <p id="tool-note" aria-live="polite">Python powers the practice workflow in Career Copilot Lab.</p>
+          <a id="tool-link" href="https://github.com/MSHLIKHON/career_copilot_lab">Explore Career Copilot Lab ↗</a>
+        </div>
+      </div>
       <div class="skill-filters reveal" role="tablist" aria-label="Filter technical skills">
         <button class="skill-filter active" type="button" role="tab" aria-selected="true" data-skill-filter="all">All skills</button>
         <button class="skill-filter" type="button" role="tab" aria-selected="false" data-skill-filter="languages">Languages</button>
