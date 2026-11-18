@@ -110,6 +110,9 @@
 .hero h1 > span { color:var(--text); text-shadow:none; }
 .hero h1 .name-period { color:var(--accent); }
 .terminal-line { display:none; }
+.hero-welcome{order:2;display:flex;align-items:baseline;gap:.8rem;margin:0;color:var(--muted)}
+.hero-welcome [lang="bn"]{color:var(--accent);font-size:clamp(1.4rem,4vw,2.3rem);font-weight:750}
+@media(prefers-reduced-motion:no-preference){.hero-welcome{animation:arrive .55s ease-out both}}
 .hero h2 { font-size:1.05rem; font-weight:500; }
 .hero-panel .terminal-card { transform:none; box-shadow:0 25px 100px #0004; }
 .hero-panel pre { display:none; }
