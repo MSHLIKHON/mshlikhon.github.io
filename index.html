@@ -34,7 +34,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preload" href="assets/portrait.webp" as="image" type="image/webp" fetchpriority="high" />
   <link rel="stylesheet" href="assets/styles.css" />
-  <link rel="stylesheet" href="assets/polish.css" />
+  <link rel="stylesheet" href="assets/polish.css?v=showcase" />
+  <script defer src="assets/intro.js"></script>
   <script defer src="assets/bug-blaster.js"></script>
   <script defer src="assets/script.js?v=20261112-2"></script>
   <script defer src="assets/dispatch.js"></script>
@@ -61,6 +62,13 @@
   </script>
 </head>
 <body>
+  <div class="site-intro" id="site-intro" hidden aria-hidden="true">
+    <div class="site-intro-inner">
+      <span class="site-intro-name">LIKHON<span>.</span></span>
+      <div class="site-intro-meter"><span>Loading portfolio</span><span id="intro-percent">0%</span></div>
+      <p class="site-intro-greeting" lang="bn">স্বাগতম</p>
+    </div>
+  </div>
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="noise" aria-hidden="true"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
@@ -100,7 +108,6 @@
       <div class="hero-grid">
         <div class="hero-copy reveal">
           <p class="eyebrow"><span class="status-dot"></span> PERSONAL PORTFOLIO / DHAKA, BANGLADESH</p>
-          <p class="hero-welcome"><span lang="bn">স্বাগতম!</span> <span>Hi, I’m</span></p>
           <div class="name-lockup"><h1><small>MD. SHYED HASAN</small><span>LIKHON<span class="name-period">.</span></span></h1></div>
           <h2>CSE Undergraduate @ UIU <span class="slash">/</span> Software Engineering Major</h2>
           <p>Seeking a Junior Software Engineer role</p>
@@ -195,20 +202,7 @@
         <p>Live web apps, software prototypes, and academic projects.</p>
       </div>
 
-      <div class="filter-bar reveal">
-        <span class="filter-tabs" role="tablist" aria-label="Filter projects">
-          <button class="filter-button active" type="button" role="tab" aria-controls="project-carousel" aria-selected="true" data-filter="all">All</button>
-          <button class="filter-button" type="button" role="tab" aria-controls="project-carousel" aria-selected="false" data-filter="software">Software</button>
-          <button class="filter-button" type="button" role="tab" aria-controls="project-carousel" aria-selected="false" data-filter="database">Database</button>
-          <button class="filter-button" type="button" role="tab" aria-controls="project-carousel" aria-selected="false" data-filter="hardware">Hardware</button>
-        </span>
-        <span class="carousel-actions" aria-label="Move through projects">
-          <button type="button" id="projects-prev" aria-label="Previous projects">←</button>
-          <button type="button" id="projects-next" aria-label="Next projects">→</button>
-        </span>
-      </div>
-
-      <div class="projects-grid" id="project-carousel" data-drag-carousel tabindex="0" aria-label="Projects. Drag horizontally or use the arrow buttons.">
+      <div class="projects-grid project-showcase" id="project-carousel">
         <article class="project-card reveal" data-category="software">
           <div class="project-meta"><span>Education</span><span>Live web app</span></div>
           <h3>Prostuti · Admission OMR</h3>
@@ -223,6 +217,13 @@
           <p class="project-description">The event website for the 2026 New Government Degree College reunion.</p>
           <div class="tag-cloud compact"><span>Netlify</span><span>Event website</span></div>
           <div class="project-actions"><a class="project-action primary" href="https://ngdc-reunion-2026.netlify.app/" target="_blank" rel="noopener noreferrer">Open reunion website ↗</a></div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-meta"><span>Education</span><span>Live web app</span></div>
+          <h3>UIU Compass</h3>
+          <p class="project-description">An academic planner for UIU students to explore course choices and costs.</p>
+          <div class="project-actions"><a class="project-action primary" href="https://mshlikhon.github.io/uiu-compass/">Open planner ↗</a><a class="project-action" href="https://github.com/MSHLIKHON/uiu-compass">Source ↗</a></div>
         </article>
 
         <article class="project-card project-featured reveal isometric-card" data-category="software database">
@@ -240,7 +241,6 @@
             <p class="stack-label">Tech stack &amp; scope</p>
             <div class="tag-cloud compact"><span>Mobile App</span><span>Web Dashboard</span><span>Maps</span><span>Database</span><span>EV Research</span></div>
             <details class="charge-demo" id="chargebd-preview"><summary>Try the booking wireframe →</summary><p>Proposed architecture</p><ol><li><strong>01 · Driver app</strong>Select a station and time.</li><li><strong>02 · Booking service</strong>Check the slot against stored reservations.</li><li><strong>03 · Operator dashboard</strong>Show the reserved slot at the station.</li></ol><label>Example station <select id="station"><option>Dhaka North</option><option>Dhaka South</option></select></label> <label>Time <select id="slot"><option>09:00</option><option>14:00</option></select></label> <button type="button" id="reserve">Preview reservation</button><p id="receipt" role="status">Concept preview with fictional station data.</p></details>
-            <div class="project-actions"><a class="project-action primary" href="#chargebd-preview">Live concept preview ↘</a><span class="project-action is-disabled" aria-label="ChargeBD repository is not published yet">Repository · Coming soon</span></div>
           </div>
         </article>
 
@@ -251,7 +251,7 @@
           <p class="project-description">A donation workflow for screening, collection, and staff reporting. I fixed the direct-donation card layout in its PHP interface.</p>
           <p class="stack-label">Tech stack</p>
           <div class="tag-cloud compact"><span>Service Workflows</span><span>Database</span><span>Access Control</span><span>Reporting</span></div>
-          <div class="project-actions"><a class="project-action primary" href="assets/bloodbridge.webm">Live preview ▷</a><a class="project-action" href="https://github.com/MSHLIKHON/BloodBridge-BD" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
+          <div class="project-actions"><a class="project-action primary" href="assets/bloodbridge.webm">Watch demo ▷</a><a class="project-action" href="https://github.com/MSHLIKHON/BloodBridge-BD" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
         </article>
 
         <article class="project-card reveal" data-category="software database">
@@ -261,57 +261,18 @@
           <p class="project-description">A learning prototype with progress tracking and originality checks. I integrated the guard that detects copied reference solutions before tests run.</p>
           <p class="stack-label">Tech stack</p>
           <div class="tag-cloud compact"><span>Python</span><span>SQLite</span><span>Progress Tracking</span><span>Learning Tools</span></div>
-          <div class="project-actions"><a class="project-action primary" href="assets/copilot.webm">Live preview ▷</a><a class="project-action" href="https://github.com/MSHLIKHON/career_copilot_lab" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
+          <div class="project-actions"><a class="project-action primary" href="assets/copilot.webm">Watch demo ▷</a><a class="project-action" href="https://github.com/MSHLIKHON/career_copilot_lab" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
         </article>
 
         <article class="project-card reveal" data-category="software">
-          <div class="work-art city-art" aria-hidden="true"><span>JAVA / OBJECT-ORIENTED SYSTEMS</span><strong>MAYOR’S<br>RISE<span>↗</span></strong><small>PROJECT CONCEPT ILLUSTRATION</small></div>
           <div class="project-meta"><span>Advanced OOP Lab</span><span>Java</span></div>
           <h3>Mayor's Rise</h3>
           <p class="project-description">A Java city-builder prototype structured around reusable game objects. I helped plan the program architecture and data handling.</p>
           <p class="stack-label">Tech stack</p>
           <div class="tag-cloud compact"><span>Java</span><span>OOP</span><span>Team Project</span></div>
-          <div class="project-actions"><span class="project-action is-disabled">Live preview · Unavailable</span><a class="project-action" href="https://github.com/ashad-abir/Mayor-s-Rise/" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
+          <div class="project-actions"><a class="project-action" href="https://github.com/ashad-abir/Mayor-s-Rise/" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
         </article>
 
-        <article class="project-card reveal delay-1" data-category="database software">
-          <div class="work-art data-art" aria-hidden="true"><span>DATA THAT CONNECTS RESPONSE</span><strong>Areas → Shelters<br>↳ Rescue records</strong><small>SCHEMA CONCEPT ILLUSTRATION</small></div>
-          <div class="project-meta"><span>DBMS Lab</span><span>Database Design</span></div>
-          <h3>Earthquake Safety & Emergency Management</h3>
-          <p class="project-description">A relational model connecting affected areas with shelters, rescue resources, and user records for coordinated emergency response.</p>
-          <p class="stack-label">Tech stack</p>
-          <div class="tag-cloud compact"><span>ER Diagram</span><span>MySQL</span><span>Schema</span><span>Emergency Data</span></div>
-          <div class="project-actions"><span class="project-action is-disabled">Live preview · Not published</span><span class="project-action is-disabled">Repository · Not published</span></div>
-        </article>
-
-        <article class="project-card reveal" data-category="software">
-          <div class="work-art waste-art" aria-hidden="true"><span>SYSTEMS FOR A CLEANER CITY</span><strong>Collect.<br>Sort. Recycle.</strong><small>WORKFLOW CONCEPT ILLUSTRATION</small></div>
-          <div class="project-meta"><span>System Analysis Lab</span><span>Planning</span></div>
-          <h3>Smart Waste Recycling & Management</h3>
-          <p class="project-description">A system-analysis concept for improving local waste collection and recycling through mapped requirements, roles, and workflows.</p>
-          <p class="stack-label">Methods &amp; scope</p>
-          <div class="tag-cloud compact"><span>Requirements</span><span>Workflow</span><span>User Roles</span><span>Diagrams</span></div>
-          <div class="project-actions"><span class="project-action is-disabled">Live preview · Not published</span><span class="project-action is-disabled">Repository · Not published</span></div>
-        </article>
-
-        <article class="project-card reveal delay-1" data-category="hardware">
-          <div class="work-art robot-art" aria-hidden="true"><span>HARDWARE MEETS PURPOSE</span><strong>Sense → Act<br>Fire response.</strong><small>PROTOTYPE CONCEPT ILLUSTRATION</small></div>
-          <div class="project-meta"><span>Electronics Lab</span><span>Prototype</span></div>
-          <h3>Fire-Fighting Robot</h3>
-          <p class="project-description">A sensor-driven prototype that detects fire and responds through a motorized platform. I contributed to assembly, testing, and demonstration.</p>
-          <p class="stack-label">Hardware stack</p>
-          <div class="tag-cloud compact"><span>Sensors</span><span>Motors</span><span>Microcontroller</span><span>Teamwork</span></div>
-          <div class="project-actions"><span class="project-action is-disabled">Live demo · Not published</span><span class="project-action is-disabled">Repository · Not published</span></div>
-        </article>
-
-        <article class="project-card reveal" data-category="software">
-          <div class="project-meta"><span>Playable project</span><span>Canvas · JavaScript</span></div>
-          <h3>Bug Blaster</h3>
-          <p class="project-description">A lightweight debugging arcade built with Canvas and vanilla JavaScript. Move the compiler jet and patch bugs before production.</p>
-          <p class="stack-label">Tech stack</p>
-          <div class="tag-cloud compact"><span>JavaScript</span><span>Canvas API</span><span>CSS</span><span>Accessible Controls</span></div>
-          <div class="project-actions"><a class="project-action primary" href="#lab">Live preview ↓</a><a class="project-action" href="https://github.com/MSHLIKHON/mshlikhon.github.io" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
-        </article>
       </div>
     </section>
 
@@ -338,7 +299,6 @@
     <section class="section" id="github" aria-labelledby="github-title">
       <div class="section-heading"><p class="section-index">GITHUB / @MSHLIKHON</p><h2 id="github-title">From my <span>repositories.</span></h2></div>
       <div class="repo-shelf">
-        <article><small>Academic planning · React</small><h3>UIU Compass</h3><p>A local-first planner for UIU students to explore academic choices and costs.</p><a href="https://mshlikhon.github.io/uiu-compass/">Open the live planner ↗</a> · <a href="https://github.com/MSHLIKHON/uiu-compass">Source ↗</a></article>
         <article><small>Simulation · Java</small><h3>Game of Life</h3><p>A Java implementation of Conway’s cellular automaton. Each cell’s neighbours determine whether it survives into the next generation.</p><a href="https://github.com/MSHLIKHON/Game-of-life">Explore the code ↗</a></article>
         <article><small>Web development · HTML</small><h3>Medical portfolio</h3><p>A professional portfolio for physician Dr. Pritom Ghosh.</p><a href="https://github.com/MSHLIKHON/dr-pritom-medical-portfolio">Explore the code ↗</a></article>
       </div>
