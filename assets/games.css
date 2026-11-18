@@ -1,0 +1,21 @@
+.game-list{display:grid;gap:.7rem}
+.game-panel{border:1px solid var(--line-strong);border-radius:14px;background:var(--bg-card)}
+.game-panel summary{cursor:pointer;padding:1rem 1.2rem;font-weight:750}
+.game-panel summary span{margin-inline-start:.6em;color:var(--muted);font-size:.82rem;font-weight:500}
+.game-content{padding:1rem 1.2rem;border-top:1px solid var(--line);display:grid;justify-items:start;gap:.65rem}
+.game-content p,.game-credit{margin:0;color:var(--muted)}
+.game-credit{margin-top:1rem;font-size:.85rem}
+.game-credit a{color:var(--accent);text-decoration:underline}
+.game-board{width:min(100%,280px);display:grid;gap:.4rem}
+.ttt-board{grid-template-columns:repeat(3,minmax(0,1fr))}
+.memory-board{grid-template-columns:repeat(4,minmax(0,1fr))}
+.game-content button{min-height:44px;min-width:44px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);color:var(--text);cursor:pointer}
+.game-board button{aspect-ratio:1;font:750 1.2rem var(--mono);min-width:0}
+.game-content button[aria-disabled="true"]{cursor:default}
+.game-board button.revealed{background:var(--surface-strong);border-color:var(--accent)}
+.game-board button.matched{background:var(--accent);color:var(--bg)}
+.game-reset{padding:.45rem .85rem}
+.game-controls{display:flex;gap:.4rem}
+#snake-board{width:min(100%,280px);height:auto;border-radius:10px;background:#0a1a15}
+.charge-preview{margin:.75rem 0}
+#receipt{min-height:1.6em;margin-bottom:.35rem}

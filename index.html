@@ -38,6 +38,8 @@
   <script defer src="assets/intro.js"></script>
   <link rel="stylesheet" href="assets/playground.css">
   <script defer src="assets/playground.js"></script>
+  <link rel="stylesheet" href="assets/games.css">
+  <script defer src="assets/games.js"></script>
   <script defer src="assets/script.js?v=20261112-2"></script>
   <script defer src="assets/effects.js"></script>
   <script type="application/ld+json">
@@ -87,6 +89,7 @@
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#github">GitHub</a>
+        <a href="#games">Games</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
         <a href="#leadership">Leadership</a>
@@ -224,7 +227,14 @@
             <p class="project-description">A reservation concept connecting EV drivers with station availability, time-slot booking, and an operator-facing workflow.</p>
             <p class="stack-label">Tech stack &amp; scope</p>
             <div class="tag-cloud compact"><span>Mobile App</span><span>Web Dashboard</span><span>Maps</span><span>Database</span><span>EV Research</span></div>
-            <details class="charge-demo" id="chargebd-preview"><summary>Try the booking wireframe →</summary><p>Proposed architecture</p><ol><li><strong>01 · Driver app</strong>Select a station and time.</li><li><strong>02 · Booking service</strong>Check the slot against stored reservations.</li><li><strong>03 · Operator dashboard</strong>Show the reserved slot at the station.</li></ol><label>Example station <select id="station"><option>Dhaka North</option><option>Dhaka South</option></select></label> <label>Time <select id="slot"><option>09:00</option><option>14:00</option></select></label> <button type="button" id="reserve">Preview reservation</button><p id="receipt" role="status">Concept preview with fictional station data.</p></details>
+            <details class="charge-demo" id="chargebd-preview">
+              <summary>Try the charging station finder →</summary>
+              <p>Compare example stations and hold an available slot in this simulation.</p>
+              <label>Station <select id="station"><option>Dhaka North</option><option>Dhaka South</option></select></label>
+              <label>Time <select id="slot"><option>09:00</option><option>14:00</option><option>17:30</option></select></label>
+              <div class="charge-preview"><p id="receipt" role="status"></p><button class="button button-secondary" type="button" id="reserve">Hold sample slot</button></div>
+              <small>Fictional station data. No real booking is made.</small>
+            </details>
           </div>
         </article>
 
@@ -260,6 +270,38 @@
       </div>
     </section>
 
+    <section class="section" id="games" aria-labelledby="games-title">
+      <div class="section-heading"><h2 id="games-title">Browser <span>games.</span></h2><p>Three quick games for keyboard or touch.</p></div>
+      <div class="game-list">
+        <details name="browser-game" class="game-panel" id="snake-game">
+          <summary>Snake <span>Collect the charge cells</span></summary>
+          <div class="game-content">
+            <p>Use arrow keys with the board focused, or tap the controls.</p>
+            <canvas id="snake-board" width="280" height="280" tabindex="0" aria-label="Snake board"></canvas>
+            <div class="game-controls"><button type="button" data-direction="ArrowLeft" aria-label="Left">←</button><button type="button" data-direction="ArrowUp" aria-label="Up">↑</button><button type="button" data-direction="ArrowDown" aria-label="Down">↓</button><button type="button" data-direction="ArrowRight" aria-label="Right">→</button></div>
+            <p id="snake-status" role="status">Ready to play.</p><button type="button" class="game-reset" id="snake-start">Start Snake</button>
+          </div>
+        </details>
+        <details name="browser-game" class="game-panel" id="ttt-game">
+          <summary>Tic-Tac-Toe <span>You vs. computer</span></summary>
+          <div class="game-content">
+            <p>You play X. The computer automatically plays O after your turn.</p>
+            <div class="game-board ttt-board" id="ttt-board" role="group" aria-label="Tic-Tac-Toe board"></div>
+            <p id="ttt-status" role="status">Your turn.</p><button type="button" class="game-reset" id="ttt-reset">New round</button>
+          </div>
+        </details>
+        <details name="browser-game" class="game-panel" id="memory-game">
+          <summary>Memory Puzzle <span>Find the six pairs</span></summary>
+          <div class="game-content">
+            <p>Flip two cards at a time. Try to clear the board in fewer turns.</p>
+            <div class="game-board memory-board" id="memory-board" role="group" aria-label="Memory cards"></div>
+            <p id="memory-status" role="status">0 turns · 0 of 6 pairs</p><button type="button" class="game-reset" id="memory-reset">Shuffle cards</button>
+          </div>
+        </details>
+      </div>
+      <p class="game-credit">Game collection inspiration: <a href="https://github.com/itspyguru/Python-Games">pyGuru’s Python-Games ↗</a></p>
+      <noscript>Enable JavaScript to play the browser games.</noscript>
+    </section>
     <section class="section" id="github" aria-labelledby="github-title">
       <div class="section-heading"><p class="section-index">GITHUB / @MSHLIKHON</p><h2 id="github-title">From my <span>repositories.</span></h2></div>
       <div class="repo-shelf">
