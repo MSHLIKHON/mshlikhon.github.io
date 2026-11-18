@@ -36,11 +36,7 @@
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="stylesheet" href="assets/polish.css?v=showcase" />
   <script defer src="assets/intro.js"></script>
-  <script defer src="assets/bug-blaster.js"></script>
   <script defer src="assets/script.js?v=20261112-2"></script>
-  <script defer src="assets/dispatch.js"></script>
-  <link rel="stylesheet" href="assets/stack-pop.css">
-  <script defer src="assets/stack-pop.js"></script>
   <script defer src="assets/effects.js"></script>
   <script type="application/ld+json">
   {
@@ -88,7 +84,6 @@
       <div class="nav-links" id="nav-links">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
-        <a href="#lab">Bug Blaster</a>
         <a href="#github">GitHub</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
@@ -118,8 +113,6 @@
             <a class="button button-primary" href="#projects">Explore Projects <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="resume.html">View Résumé <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="https://github.com/MSHLIKHON?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" href="#dispatch">Play Charge Dispatch ↓</a>
-            <a class="button button-secondary" href="#stack-pop">Play Stack Pop ↓</a>
           </div>
 
           <div class="social-row" aria-label="Social profiles">
@@ -139,36 +132,6 @@
         </figure>
       </div>
 
-      <section class="stack-pop" id="stack-pop" aria-labelledby="stack-pop-title">
-        <div class="stack-pop-copy">
-          <h2 id="stack-pop-title">Stack Pop</h2>
-          <p>Match the tool shown below. Chain correct hits for bonus points.</p>
-          <p id="pop-target" role="status">Ready for a 20-second round?</p>
-          <button class="button button-primary" id="pop-start" type="button">Start round</button>
-          <noscript>Enable JavaScript to play.</noscript>
-        </div>
-        <div class="stack-pop-play">
-          <div class="stack-pop-score"><span id="pop-time">20s</span><span id="pop-score">Score 0</span><span id="pop-best">Best 0</span></div>
-          <div class="stack-pop-orbs" id="pop-orbs" role="group" aria-label="Choose a tool">
-            <button type="button" disabled>Python</button>
-            <button type="button" disabled>SQL</button>
-            <button type="button" disabled>Git</button>
-            <button type="button" disabled>JavaScript</button>
-            <button type="button" disabled>PHP</button>
-            <button type="button" disabled>Java</button>
-          </div>
-        </div>
-      </section>
-      <div class="dispatch" id="dispatch">
-        <div><p class="section-index">CHARGEBD / ARCADE</p><h2>Charge Dispatch</h2><p>Route each EV to the station it requests. Hover over the matching station, tap it, or use Tab and Enter.</p></div>
-        <div class="dispatch-board">
-          <div class="dispatch-readout"><span id="dispatch-mode">Autopilot</span><strong id="dispatch-score">0 / 5 routed</strong></div>
-          <div class="dispatch-road" aria-hidden="true"><span>EV ⚡</span></div>
-          <p id="dispatch-request" role="status">Incoming EV → Mirpur</p>
-          <div class="dispatch-stations"><button>Mirpur</button><button>Gulshan</button><button>Uttara</button></div>
-          <button id="dispatch-start" type="button">Start round</button>
-        </div>
-      </div>
       <div class="stats-grid reveal delay-2" aria-label="Academic summary">
         <article><strong>CSE</strong><span>Undergraduate Student</span></article>
         <article><strong>105 / 138</strong><span>Credits Completed</span></article>
@@ -281,26 +244,6 @@
       </div>
     </section>
 
-    <section class="section bug-lab" id="lab" aria-labelledby="bug-title">
-      <div class="bug-copy">
-        <p class="section-index">INTERACTIVE LAB / DEBUGGING</p>
-        <h2 id="bug-title">Bug <em>Blaster.</em></h2>
-        <p>Move the compiler jet. Patch bugs before uptime reaches zero.</p>
-        <p class="bug-controls">Mouse or touch · ← → / A D · Space to fire</p>
-      </div>
-      <div class="bug-console">
-        <header><span>COMPILER JET</span><span>SCORE <strong id="bug-score">000</strong> · UPTIME <strong id="bug-health">100%</strong></span></header>
-        <div class="bug-stage">
-          <canvas id="bug-canvas" width="720" height="420" aria-label="Bug Blaster game. Move the jet and shoot falling software bugs."></canvas>
-          <div class="bug-overlay" id="bug-overlay">
-            <small id="bug-kicker">SYSTEM READY</small>
-            <h3 id="bug-message">Production needs a patch.</h3>
-            <button type="button" id="bug-start">Deploy jet →</button>
-          </div>
-        </div>
-        <footer><span id="bug-log" role="status">Waiting for deployment.</span><label><input id="bug-autofire" type="checkbox" checked> Auto fire</label></footer>
-      </div>
-    </section>
     <section class="section" id="github" aria-labelledby="github-title">
       <div class="section-heading"><p class="section-index">GITHUB / @MSHLIKHON</p><h2 id="github-title">From my <span>repositories.</span></h2></div>
       <div class="repo-shelf">
