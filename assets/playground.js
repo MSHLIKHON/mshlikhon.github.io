@@ -1,5 +1,6 @@
 (() => {
   const orbit = document.querySelector('#tool-orbit');
+  if (!orbit) return;
   const buttons = [...orbit.querySelectorAll('[data-tool]')];
   const note = document.querySelector('#tool-note');
   const link = document.querySelector('#tool-link');

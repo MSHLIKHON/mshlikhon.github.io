@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://mshlikhon.github.io/</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://mshlikhon.github.io/resume.html</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  <url><loc>https://mshlikhon.github.io/</loc></url>
+  <url><loc>https://mshlikhon.github.io/about.html</loc></url>
+  <url><loc>https://mshlikhon.github.io/projects.html</loc></url>
+  <url><loc>https://mshlikhon.github.io/games.html</loc></url>
+  <url><loc>https://mshlikhon.github.io/github.html</loc></url>
+  <url><loc>https://mshlikhon.github.io/skills.html</loc></url>
+  <url><loc>https://mshlikhon.github.io/education.html</loc></url>
+  <url><loc>https://mshlikhon.github.io/leadership.html</loc></url>
+  <url><loc>https://mshlikhon.github.io/contact.html</loc></url>
 </urlset>

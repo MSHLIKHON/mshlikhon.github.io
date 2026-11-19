@@ -1,4 +1,6 @@
 (() => {
+  const legacy = location.hash.slice(1);
+  if (document.body.dataset.page === 'home' && ['about','projects','github','games','skills','education','leadership','contact'].includes(legacy)) { location.replace(legacy + '.html'); return; }
   const intro = document.querySelector('#site-intro');
   if (!intro || location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   try {

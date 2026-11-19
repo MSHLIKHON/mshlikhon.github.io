@@ -12,6 +12,16 @@ A dependency-free, responsive personal portfolio website built with HTML, CSS, a
 - Printable resume page (`resume.html`)
 - SEO and social sharing metadata
 
+## Update the pages
+
+Edit shared markup and section content in `templates/page.html`, then run:
+
+```bash
+python3 scripts/build-pages.py
+```
+
+Commit the generated HTML pages and `sitemap.xml` together with the template. The home page contains the introduction; each navigation destination has its own static HTML route. Tetris lives in `assets/tetris.js` and shares the arcade’s local best-score storage.
+
 ## Preview locally
 
 Open `index.html` directly, or run a local server:

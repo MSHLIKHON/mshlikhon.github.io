@@ -32,6 +32,7 @@ function boardButtons(board, count, choose) {
 
 (() => {
   const status = document.querySelector('#ttt-status');
+  if (!status) return;
   const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
   const cells = boardButtons(document.querySelector('#ttt-board'), 9, play);
   let board, pending, busy, ended;
@@ -111,6 +112,7 @@ function boardButtons(board, count, choose) {
 (() => {
   const names = ['Python', 'SQL', 'Git', 'PHP', 'Java', 'CSS'];
   const status = document.querySelector('#memory-status');
+  if (!status) return;
   const cells = boardButtons(document.querySelector('#memory-board'), 12, flip);
   let deck, open, matched, turns, pending;
 
@@ -164,6 +166,7 @@ function boardButtons(board, count, choose) {
 
 (() => {
   const panel = document.querySelector('#snake-game');
+  if (!panel) return;
   const canvas = document.querySelector('#snake-board');
   const draw = canvas.getContext('2d');
   if (!draw) return;
@@ -279,6 +282,7 @@ function boardButtons(board, count, choose) {
 
 (() => {
   const station = document.querySelector('#station');
+  if (!station) return;
   const slot = document.querySelector('#slot');
   const reserve = document.querySelector('#reserve');
   const receipt = document.querySelector('#receipt');
@@ -307,6 +311,7 @@ function boardButtons(board, count, choose) {
 
 (() => {
   const panel = document.querySelector('#ev-game');
+  if (!panel) return;
   const start = document.querySelector('#ev-start');
   const pause = document.querySelector('#ev-pause');
   const status = document.querySelector('#ev-status');

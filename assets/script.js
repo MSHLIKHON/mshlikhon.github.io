@@ -92,18 +92,11 @@
     reveals.forEach((element) => element.classList.add('visible'));
   }
 
-  const sections = [...document.querySelectorAll('main section[id]')];
-  const navAnchors = [...document.querySelectorAll('.nav-links a')];
-  const setActiveLink = () => {
-    const marker = window.scrollY + 140;
-    let current = 'home';
-    sections.forEach((section) => {
-      if (section.offsetTop <= marker) current = section.id;
-    });
-    navAnchors.forEach((anchor) => anchor.classList.toggle('active', anchor.getAttribute('href') === `#${current}`));
-  };
-  window.addEventListener('scroll', setActiveLink, { passive: true });
-  setActiveLink();
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    const active = link.getAttribute('href') === (document.body.dataset.page === 'home' ? 'index.html' : document.body.dataset.page + '.html');
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'page');
+  });
 
   const filterButtons = document.querySelectorAll('.filter-button');
   const projectCards = document.querySelectorAll('.project-card');
