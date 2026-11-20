@@ -55,6 +55,20 @@
     const button=document.createElement('button');button.type='button';button.textContent=title;button.id='file-'+i;button.setAttribute('role','tab');button.setAttribute('aria-controls',card.id);card.setAttribute('aria-labelledby',button.id);files.append(button);
     if(!card.querySelector('.project-shot,.project-visual')){
       const cover=document.createElement('div');cover.className='project-cover';cover.setAttribute('aria-hidden','true');
+      const themes = [
+        ['omr','PROSTUTI','Practice with purpose.','Admission practice','Answer sheet'],
+        ['reunion','Together, again.','NGDC Reunion 2026','Community & connection','A reason to reconnect'],
+        ['compass','UIU Compass','A clearer academic path.','Academic planning','Plan your next semester']
+      ];
+      if (themes[i]) {
+        const [theme,name,caption,kicker,windowTitle]=themes[i];
+        cover.classList.add('themed-cover','cover-'+theme);
+        cover.innerHTML=`<div class="cover-copy"><span class="cover-kicker">${kicker}</span><strong>${name}</strong><span>${caption}</span></div><div class="cover-window"><div class="cover-window-bar"></div><div class="cover-window-title">${windowTitle}</div><div class="cover-tiles">${'<i></i>'.repeat(theme==='omr'?12:6)}</div><div class="cover-line"></div><div class="cover-line"></div></div>`;
+        card.prepend(cover);
+        const note=document.createElement('p');note.className='cover-preview-note';note.textContent='Designed project cover · open the live site to explore the app';cover.after(note);
+        return button;
+      }
+
       const initials=document.createElement('strong');initials.textContent=['OMR','NGDC','UIU','','','','JAVA'][i]||'</>';
       const detail=document.createElement('span');detail.textContent=[...card.querySelectorAll('.project-meta span')].map(span=>span.textContent).join(' / ')||'PROJECT';cover.append(initials,detail);card.prepend(cover);
     }
