@@ -66,11 +66,10 @@
         cover.innerHTML=`<div class="cover-copy"><span class="cover-kicker">${kicker}</span><strong>${name}</strong><span>${caption}</span></div><div class="cover-window"><div class="cover-window-bar"></div><div class="cover-window-title">${windowTitle}</div><div class="cover-tiles">${'<i></i>'.repeat(theme==='omr'?12:6)}</div><div class="cover-line"></div><div class="cover-line"></div></div>`;
         card.prepend(cover);
         const note=document.createElement('p');note.className='cover-preview-note';note.textContent='Designed project cover · open the live site to explore the app';cover.after(note);
-        return button;
-      }
-
+      } else {
       const initials=document.createElement('strong');initials.textContent=['OMR','NGDC','UIU','','','','JAVA'][i]||'</>';
       const detail=document.createElement('span');detail.textContent=[...card.querySelectorAll('.project-meta span')].map(span=>span.textContent).join(' / ')||'PROJECT';cover.append(initials,detail);card.prepend(cover);
+      }
     }
     button.addEventListener('click',()=>select(i,true));
     button.addEventListener('keydown',e=>{
