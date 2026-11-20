@@ -29,6 +29,7 @@
     menuToggle?.classList.remove('open');
     navLinks?.classList.remove('open');
     menuToggle?.setAttribute('aria-expanded', 'false');
+    menuToggle?.setAttribute('aria-label', 'Open menu');
     document.body.classList.remove('menu-open');
   };
 
@@ -36,6 +37,7 @@
     const isOpen = menuToggle.classList.toggle('open');
     navLinks?.classList.toggle('open', isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     document.body.classList.toggle('menu-open', isOpen);
   });
   navLinks?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));

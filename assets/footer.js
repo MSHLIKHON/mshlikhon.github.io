@@ -1,8 +1,8 @@
 (() => {
   const clock = document.querySelector('#dhaka-time');
   if (!clock) return;
-  const format = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Asia/Dhaka', hour: '2-digit', minute: '2-digit', hour12: false
+  const format = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Dhaka', hour: '2-digit', minute: '2-digit', hour12: true
   });
   function updateClock() {
     if (document.hidden) return;
