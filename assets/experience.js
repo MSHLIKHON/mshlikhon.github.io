@@ -38,57 +38,13 @@
 })();
 
 (() => {
-  const grid=document.querySelector('#project-carousel');
-  if(!grid)return;
-  const cards=[...grid.querySelectorAll(':scope > .project-card')];
-  const shell=document.createElement('div');shell.className='project-explorer';
-  const files=document.createElement('div');files.className='project-files';files.setAttribute('role','tablist');files.setAttribute('aria-label','Browse projects');
-  const label=document.createElement('p');label.textContent='WORKSPACE / PROJECTS';files.append(label);
-  const workspace=document.createElement('div');workspace.className='project-workspace';
-  const header=document.createElement('div');header.className='project-workspace-header';
-  const filename=document.createElement('span');const kind=document.createElement('span');kind.textContent='PROJECT OVERVIEW';header.append(filename,kind);
-  grid.before(shell);shell.append(files,workspace);workspace.append(header,grid);
-  const buttons=cards.map((card,i)=>{
-    const title=card.querySelector('h3').textContent;
-    card.id='project-'+title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-    card.classList.remove('reveal','isometric-card');card.classList.add('visible');card.setAttribute('role','tabpanel');
-    const button=document.createElement('button');button.type='button';button.textContent=title;button.id='file-'+i;button.setAttribute('role','tab');button.setAttribute('aria-controls',card.id);card.setAttribute('aria-labelledby',button.id);files.append(button);
-    if(!card.querySelector('.project-shot,.project-visual')){
-      const cover=document.createElement('div');cover.className='project-cover';cover.setAttribute('aria-hidden','true');
-      const themes = [
-        ['omr','PROSTUTI','Practice with purpose.','Admission practice','Answer sheet'],
-        ['reunion','Together, again.','NGDC Reunion 2026','Community & connection','A reason to reconnect'],
-        ['compass','UIU Compass','A clearer academic path.','Academic planning','Plan your next semester']
-      ];
-      if (themes[i]) {
-        const [theme,name,caption,kicker,windowTitle]=themes[i];
-        cover.classList.add('themed-cover','cover-'+theme);
-        cover.innerHTML=`<div class="cover-copy"><span class="cover-kicker">${kicker}</span><strong>${name}</strong><span>${caption}</span></div><div class="cover-window"><div class="cover-window-bar"></div><div class="cover-window-title">${windowTitle}</div><div class="cover-tiles">${'<i></i>'.repeat(theme==='omr'?12:6)}</div><div class="cover-line"></div><div class="cover-line"></div></div>`;
-        card.prepend(cover);
-        const note=document.createElement('p');note.className='cover-preview-note';note.textContent='Designed project cover · open the live site to explore the app';cover.after(note);
-      } else {
-      const initials=document.createElement('strong');initials.textContent=['OMR','NGDC','UIU','','','','JAVA'][i]||'</>';
-      const detail=document.createElement('span');detail.textContent=[...card.querySelectorAll('.project-meta span')].map(span=>span.textContent).join(' / ')||'PROJECT';cover.append(initials,detail);card.prepend(cover);
-      }
-    }
-    button.addEventListener('click',()=>select(i,true));
-    button.addEventListener('keydown',e=>{
-      let next;if(['ArrowDown','ArrowRight'].includes(e.key))next=(i+1)%cards.length;if(['ArrowUp','ArrowLeft'].includes(e.key))next=(i+cards.length-1)%cards.length;if(e.key==='Home')next=0;if(e.key==='End')next=cards.length-1;
-      if(next!==undefined){e.preventDefault();select(next,true);buttons[next].focus();}
-    });return button;
-  });
-  function select(i,updateURL=false){
-    cards.forEach((card,n)=>{card.hidden=n!==i;buttons[n].setAttribute('aria-selected',String(n===i));buttons[n].tabIndex=n===i?0:-1;card.classList.toggle('panel-enter',n===i);});
-    filename.textContent=cards[i].querySelector('h3').textContent+' / overview';
-    if(updateURL)history.replaceState(null,'','#'+cards[i].id);
-  }
-  function fromHash(){
-    const target=document.getElementById(location.hash.slice(1));
-    const i=cards.findIndex(card=>card===target||card.contains(target));
-    select(i>=0?i:4);
-    if(target?.tagName==='DETAILS')target.open=true;
-  }
-  addEventListener('hashchange',fromHash);fromHash();
+  const preview = document.getElementById('chargebd-preview');
+  if (!preview) return;
+  const openPreview = () => {
+    if (location.hash === '#chargebd-preview') preview.open = true;
+  };
+  addEventListener('hashchange', openPreview);
+  openPreview();
 })();
 
 (() => {

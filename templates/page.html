@@ -45,10 +45,10 @@
   <link rel="stylesheet" href="assets/footer.css">
   <link rel="stylesheet" href="assets/pages.css">
   <link rel="stylesheet" href="assets/experience.css">
-  <link rel="stylesheet" href="assets/project-covers.css">
+  <link rel="stylesheet" href="assets/work-gallery.css">
   <link rel="stylesheet" href="assets/refinements.css?v=mobile-20261120">
   <script defer src="assets/refinements.js"></script>
-  <script defer src="assets/experience.js?v=project-click-fix-2"></script>
+  <script defer src="assets/experience.js?v=work-gallery"></script>
   <script defer src="assets/footer.js?v=12hour"></script>
   <script type="application/ld+json">
   {
@@ -177,6 +177,14 @@
         </article>
       </div>
 
+      <figure class="about-video">
+        <figcaption>Meet Likhon</figcaption>
+        <video controls playsinline preload="none" poster="assets/about-video-poster.webp" aria-label="About Likhon video">
+          <source src="assets/about-video.mp4" type="video/mp4">
+          <a href="assets/about-video.mp4">Download the About video</a>
+        </video>
+      </figure>
+
         <div class="hero-lab about-lab reveal">
           <div class="lab-identity"><img src="assets/portrait.webp" width="877" height="1080" alt="Md. Shyed Hasan Likhon" loading="lazy" decoding="async"><div><span>BUILT AROUND A REAL INTEREST</span><strong>Software for a more connected Bangladesh.</strong></div></div>
           <div class="ev-lab" id="ev-lab">
@@ -209,8 +217,9 @@
         <p>Live web apps, software prototypes, and academic projects.</p>
       </div>
 
-      <div class="projects-grid project-showcase" id="project-carousel">
-        <article class="project-card reveal" data-category="software">
+      <div class="projects-grid project-showcase work-gallery">
+        <article id="project-prostuti-admission-omr" class="project-card reveal" data-category="software">
+          <a class="work-shot" href="assets/work-prostuti.webp" aria-label="View full screenshot: Prostuti OMR welcome screen"><img src="assets/work-prostuti.webp" alt="Prostuti OMR welcome screen" loading="lazy" decoding="async"></a>
           <div class="project-meta"><span>Education</span><span>Live web app</span></div>
           <h3>Prostuti · Admission OMR</h3>
           <p class="project-description">A Bangla OMR practice app for admission candidates in Bangladesh, with timed 100-question sessions and saved attempt history.</p>
@@ -218,7 +227,16 @@
           <div class="project-actions"><a class="project-action primary" href="https://admission-omr.myselfmshl.workers.dev/" target="_blank" rel="noopener noreferrer">Open Admission OMR ↗</a></div>
         </article>
 
-        <article class="project-card reveal" data-category="software">
+        <article id="project-focus-on-target" class="project-card reveal">
+          <a class="work-shot" href="assets/work-admission-tracker.webp" aria-label="View full screenshot: University admission tracker dashboard"><img src="assets/work-admission-tracker.webp" alt="University admission tracker dashboard" loading="lazy" decoding="async"></a>
+          <div class="project-meta"><span>Education</span><span>Live web app</span></div>
+          <h3>Focus on Target</h3>
+          <p class="project-description">A university admission tracker with application dates, eligibility checks, and exam clash alerts.</p>
+          <div class="project-actions"><a class="project-action primary" href="https://focusontarget-hsc.vercel.app/" target="_blank" rel="noopener noreferrer">Open admission tracker</a></div>
+        </article>
+
+        <article id="project-ngdc-reunion-2026" class="project-card reveal" data-category="software">
+          <a class="work-shot" href="assets/work-reunion.webp" aria-label="View full screenshot: NGDC Reunion homepage and event countdown"><img src="assets/work-reunion.webp" alt="NGDC Reunion homepage and event countdown" loading="lazy" decoding="async"></a>
           <div class="project-meta"><span>Community</span><span>Live website</span></div>
           <h3>NGDC Reunion 2026</h3>
           <p class="project-description">The event website for the 2026 New Government Degree College reunion.</p>
@@ -226,14 +244,25 @@
           <div class="project-actions"><a class="project-action primary" href="https://ngdc-reunion-2026.netlify.app/" target="_blank" rel="noopener noreferrer">Open reunion website ↗</a></div>
         </article>
 
-        <article class="project-card reveal">
+        <article id="project-uiu-compass" class="project-card reveal">
+          <a class="work-shot" href="assets/work-compass.webp" aria-label="View full screenshot: UIU Compass academic planning dashboard"><img src="assets/work-compass.webp" alt="UIU Compass academic planning dashboard" loading="lazy" decoding="async"></a>
           <div class="project-meta"><span>Education</span><span>Live web app</span></div>
           <h3>UIU Compass</h3>
-          <p class="project-description">An academic planner for UIU students to explore course choices and costs.</p>
+          <p class="project-description">Plan courses, estimate CGPA, compare retakes, and track graduation requirements.</p>
           <div class="project-actions"><a class="project-action primary" href="https://uiucompass.vercel.app/">Open planner ↗</a><a class="project-action" href="https://github.com/MSHLIKHON/uiu-compass">Source ↗</a></div>
         </article>
 
-        <article class="project-card project-featured reveal isometric-card" data-category="software database">
+        <article id="project-bloodbridge-bd" class="project-card reveal" data-category="software database">
+          <a class="work-shot" href="assets/work-bloodbridge-home.webp" aria-label="View full screenshot: BloodBridge donor search and homepage"><img src="assets/work-bloodbridge-home.webp" alt="BloodBridge donor search and homepage" loading="lazy" decoding="async"></a>
+          <div class="project-meta"><span>Blood donation platform</span><span class="work-status">Processing</span></div>
+          <h3>BloodBridge BD</h3>
+          <p class="project-description">The current preview shows donor search by blood group and area, and a directory populated with demo profiles.</p>
+          <p class="stack-label">Tech stack</p>
+          <div class="tag-cloud compact"><span>Service Workflows</span><span>Database</span><span>Access Control</span><span>Reporting</span></div>
+          <div class="project-actions"><a class="project-action" href="assets/work-bloodbridge-donors.webp">View donor directory screenshot</a><a class="project-action primary" href="assets/bloodbridge.webm">Watch demo ▷</a><a class="project-action" href="https://github.com/MSHLIKHON/BloodBridge-BD" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
+        </article>
+
+        <article id="project-chargebd" class="project-card project-featured reveal isometric-card" data-category="software database">
           <div class="project-visual chargebd-visual" aria-hidden="true">
             <div class="map-grid"></div>
             <div class="charge-route route-a"></div><div class="charge-route route-b"></div>
@@ -258,17 +287,7 @@
           </div>
         </article>
 
-        <article class="project-card reveal" data-category="software database">
-          <a href="assets/bloodbridge.webp"><img class="project-shot" src="assets/bloodbridge.webp" width="1152" height="800" loading="lazy" decoding="async" fetchpriority="low" alt="BloodBridge BD dashboard · open full screenshot"></a>
-          <div class="project-meta"><span>Featured / Academic Demo</span><span>PHP · MySQL</span></div>
-          <h3>BloodBridge BD</h3>
-          <p class="project-description">A donation workflow for screening, collection, and staff reporting. I fixed the direct-donation card layout in its PHP interface.</p>
-          <p class="stack-label">Tech stack</p>
-          <div class="tag-cloud compact"><span>Service Workflows</span><span>Database</span><span>Access Control</span><span>Reporting</span></div>
-          <div class="project-actions"><a class="project-action primary" href="assets/bloodbridge.webm">Watch demo ▷</a><a class="project-action" href="https://github.com/MSHLIKHON/BloodBridge-BD" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
-        </article>
-
-        <article class="project-card reveal" data-category="software database">
+        <article id="project-career-copilot-lab" class="project-card reveal" data-category="software database">
           <a href="assets/copilot.webp"><img class="project-shot" src="assets/copilot.webp" width="1152" height="800" loading="lazy" decoding="async" fetchpriority="low" alt="Career Copilot Lab workspace · open full screenshot"></a>
           <div class="project-meta"><span>Featured / Team Prototype</span><span>Python · Streamlit</span></div>
           <h3>Career Copilot Lab</h3>
@@ -278,7 +297,7 @@
           <div class="project-actions"><a class="project-action primary" href="assets/copilot.webm">Watch demo ▷</a><a class="project-action" href="https://github.com/MSHLIKHON/career_copilot_lab" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
         </article>
 
-        <article class="project-card reveal" data-category="software">
+        <article id="project-mayor-s-rise" class="project-card reveal" data-category="software">
           <div class="project-meta"><span>Advanced OOP Lab</span><span>Java</span></div>
           <h3>Mayor's Rise</h3>
           <p class="project-description">A Java city-builder prototype structured around reusable game objects. I helped plan the program architecture and data handling.</p>
@@ -286,7 +305,6 @@
           <div class="tag-cloud compact"><span>Java</span><span>OOP</span><span>Team Project</span></div>
           <div class="project-actions"><a class="project-action" href="https://github.com/ashad-abir/Mayor-s-Rise/" target="_blank" rel="noreferrer">GitHub repo ↗</a></div>
         </article>
-
       </div>
     </section>
 
@@ -325,7 +343,16 @@
     </section>
     <section class="section" id="github" aria-labelledby="github-title">
       <div class="section-heading"><p class="section-index">GITHUB / @MSHLIKHON</p><h2 id="github-title">From my <span>repositories.</span></h2></div>
+      <div class="github-profile-card">
+        <img src="assets/profile-avatar-v2.jpg" width="64" height="64" alt="" loading="lazy">
+        <div><h3>Md. Shyed Hasan Likhon</h3><p>@MSHLIKHON · Source code and project history</p></div>
+        <a class="button button-primary" href="https://github.com/MSHLIKHON">View GitHub profile</a>
+      </div>
       <div class="repo-shelf">
+        <article><small>Education</small><h3>Admission Portal</h3><p>University application dates, exam clash alerts, and eligibility tools.</p><div class="repo-actions"><a href="https://github.com/MSHLIKHON/addmission-protal-2026">View source</a><a href="projects.html#project-focus-on-target">Project preview</a></div></article>
+        <article><small>Academic planning</small><h3>UIU Compass</h3><p>Course planning and degree progress for UIU students.</p><div class="repo-actions"><a href="https://github.com/MSHLIKHON/uiu-compass">View source</a><a href="projects.html#project-uiu-compass">Project preview</a></div></article>
+        <article><small>Learning tools</small><h3>Career Copilot Lab</h3><p>A practice workspace with progress tracking and originality checks.</p><div class="repo-actions"><a href="https://github.com/MSHLIKHON/career_copilot_lab">View source</a><a href="projects.html#project-career-copilot-lab">Project preview</a></div></article>
+        <article><small>Web development</small><h3>This portfolio</h3><p>The static site, its interactions, and its browser games.</p><div class="repo-actions"><a href="https://github.com/MSHLIKHON/mshlikhon.github.io">View source</a><a href="games.html">Play the games</a></div></article>
         <article><small>Simulation · Java</small><h3>Game of Life</h3><p>A Java implementation of Conway’s cellular automaton. Each cell’s neighbours determine whether it survives into the next generation.</p><a href="https://github.com/MSHLIKHON/Game-of-life">Explore the code ↗</a></article>
         <article><small>Web development · HTML</small><h3>Medical portfolio</h3><p>A professional portfolio for physician Dr. Pritom Ghosh.</p><a href="https://github.com/MSHLIKHON/dr-pritom-medical-portfolio">Explore the code ↗</a></article>
       </div>
