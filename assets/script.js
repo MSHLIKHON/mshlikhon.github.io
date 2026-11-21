@@ -7,13 +7,20 @@
     set(key, value) { try { window.localStorage.setItem(key, value); } catch { /* Storage may be blocked in local preview. */ } }
   };
   const savedTheme = storage.get('msh-theme');
-  root.dataset.theme = savedTheme || 'dark';
+  const syncThemeToggle = () => {
+    const dark = root.dataset.theme === 'dark';
+    themeToggle?.setAttribute('aria-pressed', String(dark));
+    if (themeToggle) themeToggle.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+  };
+  root.dataset.theme = savedTheme === 'light' ? 'light' : 'dark';
+  syncThemeToggle();
   themeToggle?.addEventListener('click', () => {
     const applyTheme = () => {
       root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
       storage.set('msh-theme', root.dataset.theme);
+      syncThemeToggle();
     };
-    if (reducedMotion || !document.startViewTransition) {
+    if (reducedMotion || !matchMedia('(min-width: 981px) and (pointer: fine)').matches || document.querySelector('.about-video video') || !document.startViewTransition) {
       applyTheme();
       return;
     }
