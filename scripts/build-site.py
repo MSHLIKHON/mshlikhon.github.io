@@ -3,7 +3,7 @@ from pathlib import Path
 R = Path(__file__).resolve().parents[1]
 rd = lambda p: (R / p).read_text(encoding='utf8')
 BASE = 'https://mshlikhon.github.io/'
-NAV = [('index', 'Home'), ('about', 'About'), ('projects', 'Projects'), ('skills', 'Skills'), ('games', 'Games'), ('contact', 'Contact')]
+NAV = [('index', 'Home'), ('about', 'About'), ('projects', 'Projects'), ('github', 'GitHub'), ('skills', 'Skills'), ('education', 'Education'), ('leadership', 'Leadership'), ('contact', 'Contact'), ('games', 'Games')]
 FOOT = [('about', 'About'), ('projects', 'Projects'), ('github', 'GitHub'), ('skills', 'Skills'), ('games', 'Games'), ('education', 'Education'), ('leadership', 'Leadership'), ('resume', 'Résumé'), ('contact', 'Contact')]
 LD = '{"@context":"https://schema.org","@type":"Person","name":"Md. Shyed Hasan Likhon","url":"%s","jobTitle":"Software Developer","alumniOf":"United International University","address":{"@type":"PostalAddress","addressLocality":"Dhaka","addressCountry":"BD"},"sameAs":["https://github.com/MSHLIKHON","https://www.linkedin.com/in/mshlikhon/","https://www.facebook.com/shyed.likhon","https://x.com/shyed_likhon"]}' % BASE
 FONTS = 'https://fonts.googleapis.com/css2?family=Sora:wght@400..800&family=Inter:wght@300..800&family=JetBrains+Mono:wght@400..700&family=Hind+Siliguri:wght@500;600&display=swap'
@@ -49,7 +49,7 @@ def shell(key, title, desc, main, js=(), css=(), noindex=False):
         '<script type="application/ld+json">%s</script>\n' % LD if home else '')
     field = '' if home else '<canvas id="field" aria-hidden="true"></canvas>'
     body = ('<body>\n%s<div id="bar"></div>' + field + '<div id="pv" aria-hidden="true"><img alt=""></div>\n'
-        '<header><nav class="w" aria-label="Primary"><a class="brand" href="index.html">LIKHON<i>_</i></a><div class="ls">%s</div>'
+        '<header><nav class="w" aria-label="Primary"><a class="brand" href="index.html"><img class="brand-av" src="assets/profile-avatar-v2.jpg" alt="" width="34" height="34">LIKHON<i>_</i></a><div class="ls">%s</div>'
         '<a class="game-btn" href="games.html"><span class="gb-tri" aria-hidden="true"></span>Games</a><button id="theme" class="theme-btn" type="button" aria-label="Switch light or dark theme"><span class="eclipse" aria-hidden="true"><span class="ecl-core"></span><span class="ecl-shadow"></span></span></button><button id="mt" class="mt" type="button" aria-label="Menu" aria-expanded="false">Menu</button></nav></header>\n'
         + (FUNBAR % FUN.get(key, 'Take a break.')) + '\n'
         '%s\n<footer>' + FUNSEG + '<div class="w fr"><span>© 2026 Md. Shyed Hasan Likhon</span><div>%s</div></div>' + '</footer>\n'
