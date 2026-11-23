@@ -3,10 +3,10 @@ from pathlib import Path
 R = Path(__file__).resolve().parents[1]
 rd = lambda p: (R / p).read_text(encoding='utf8')
 BASE = 'https://mshlikhon.github.io/'
-NAV = [('about', 'About'), ('projects', 'Projects'), ('skills', 'Skills'), ('games', 'Games'), ('contact', 'Contact')]
-FOOT = NAV[:2] + [('github', 'GitHub')] + NAV[2:4] + [('education', 'Education'), ('leadership', 'Leadership'), ('resume', 'Résumé'), ('contact', 'Contact')]
-LD = '{"@context":"https://schema.org","@type":"Person","name":"Md. Shyed Hasan Likhon","url":"%s","jobTitle":"Software Developer","alumniOf":"United International University","address":{"@type":"PostalAddress","addressLocality":"Dhaka","addressCountry":"BD"},"sameAs":["https://github.com/MSHLIKHON","https://www.linkedin.com/in/mshlikhon/","https://x.com/shyed_likhon"]}' % BASE
-FONTS = 'https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Manrope:wght@300..800&family=Hind+Siliguri:wght@500&display=swap'
+NAV = [('index', 'Home'), ('about', 'About'), ('projects', 'Projects'), ('skills', 'Skills'), ('games', 'Games'), ('contact', 'Contact')]
+FOOT = [('about', 'About'), ('projects', 'Projects'), ('github', 'GitHub'), ('skills', 'Skills'), ('games', 'Games'), ('education', 'Education'), ('leadership', 'Leadership'), ('resume', 'Résumé'), ('contact', 'Contact')]
+LD = '{"@context":"https://schema.org","@type":"Person","name":"Md. Shyed Hasan Likhon","url":"%s","jobTitle":"Software Developer","alumniOf":"United International University","address":{"@type":"PostalAddress","addressLocality":"Dhaka","addressCountry":"BD"},"sameAs":["https://github.com/MSHLIKHON","https://www.linkedin.com/in/mshlikhon/","https://www.facebook.com/shyed.likhon","https://x.com/shyed_likhon"]}' % BASE
+FONTS = 'https://fonts.googleapis.com/css2?family=Sora:wght@400..800&family=Inter:wght@300..800&family=JetBrains+Mono:wght@400..700&family=Hind+Siliguri:wght@500;600&display=swap'
 EXT = ' target="_blank" rel="noopener"'
 
 
@@ -33,7 +33,7 @@ WMARK = '<div class="wmark" aria-hidden="true">LIKHON_</div>'
 def shell(key, title, desc, main, js=(), css=(), noindex=False):
     home = key == 'index'
     url = BASE + ('' if home else key + '.html')
-    links = ''.join('<a href="%s.html"%s>%s</a>' % (k, ' aria-current="page"' if k == key else '', n) for k, n in NAV)
+    links = ''.join('<a href="%s.html"%s>%s</a>' % (k, ' aria-current="page"' if k == key else '', n) for k, n in NAV if k != 'games')
     foot = ''.join('<a href="%s.html">%s</a>' % (k, n) for k, n in FOOT)
     head = ('<!doctype html>\n<html lang="en" data-theme="dark">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
         '<title>%s</title>\n<meta name="description" content="%s">\n<link rel="canonical" href="%s">\n%s'
@@ -50,11 +50,11 @@ def shell(key, title, desc, main, js=(), css=(), noindex=False):
     field = '' if home else '<canvas id="field" aria-hidden="true"></canvas>'
     body = ('<body>\n%s<div id="bar"></div>' + field + '<div id="pv" aria-hidden="true"><img alt=""></div>\n'
         '<header><nav class="w" aria-label="Primary"><a class="brand" href="index.html">LIKHON<i>_</i></a><div class="ls">%s</div>'
-        '<button id="theme" type="button" aria-label="Switch light or dark theme">◐</button><button id="mt" class="mt" type="button" aria-label="Menu" aria-expanded="false">Menu</button></nav></header>\n'
+        '<a class="game-btn" href="games.html"><span class="gb-tri" aria-hidden="true"></span>Games</a><button id="theme" class="theme-btn" type="button" aria-label="Switch light or dark theme"><span class="eclipse" aria-hidden="true"><span class="ecl-core"></span><span class="ecl-shadow"></span></span></button><button id="mt" class="mt" type="button" aria-label="Menu" aria-expanded="false">Menu</button></nav></header>\n'
         + (FUNBAR % FUN.get(key, 'Take a break.')) + '\n'
-        '%s\n<footer>' + FUNSEG + '<div class="w fr"><span>© 2026 Md. Shyed Hasan Likhon</span><div>%s</div></div>' + WMARK + '</footer>\n'
+        '%s\n<footer>' + FUNSEG + '<div class="w fr"><span>© 2026 Md. Shyed Hasan Likhon</span><div>%s</div></div>' + '</footer>\n'
         '<script defer src="assets/site.js"></script>\n%s</body>\n</html>\n') % (
-        '<div class="intro" aria-hidden="true"><span lang="bn">স্বাগতম</span></div>\n' if home else '', links, main, foot,
+        '<div class="intro" aria-hidden="true"><div class="intro-in"><span class="intro-word">WELCOME</span><span class="intro-line"></span><span class="intro-sub">to my corner of the web</span></div></div>\n' if home else '', links, main, foot,
         ''.join('<script defer src="assets/%s"></script>\n' % j for j in js))
     (R / (key + '.html')).write_text(head + body, encoding='utf8')
 
@@ -67,10 +67,12 @@ def lns(l): return '<div class="ln">%s</div>' % ''.join('<a href="%s"%s>%s</a>' 
 def card(h, p, extra='', k=''): return '<article class="cd">%s<h3>%s</h3><p>%s</p>%s</article>' % (('<span class="k">%s</span>' % k) if k else '', h, p, extra)
 def tl(items): return '<ol class="tl">%s</ol>' % ''.join('<li><time>%s</time><h3>%s</h3><p>%s</p></li>' % i for i in items)
 
+TKHTML_CONST = '<div class="toolkit" id="toolkit"><p class="toolkit-hint">Drag to rotate · Tap a skill to open its group</p><div class="orbit-stage" id="orbitStage" role="img" aria-label="Interactive 3D constellation of the tools I use"><canvas id="orbitCanvas" aria-hidden="true"></canvas><div class="orbit-center-figure"><img src="assets/portrait.webp" alt="" width="877" height="1080" loading="lazy" decoding="async"></div><div class="orbit-nodes" id="orbitNodes" aria-hidden="true"></div></div><div class="toolkit-list" id="toolkitList"><div class="tk-row active"><button class="tk-trigger" type="button" aria-expanded="true" aria-controls="tk-panel-0" id="tk-btn-0"><span class="tk-cat-name">Languages</span><span class="tk-meta"><span class="tk-inline-preview" aria-hidden="true"></span><span class="tk-plus" aria-hidden="true">+</span></span></button><div class="tk-panel" id="tk-panel-0" role="region" aria-labelledby="tk-btn-0"><div class="tk-panel-inner"><div class="tk-tags"><span class="tk-tag" data-orbit>C</span><span class="tk-tag" data-orbit>C++</span><span class="tk-tag" data-orbit>Java</span><span class="tk-tag" data-orbit>Python</span><span class="tk-tag" data-orbit>PHP</span><span class="tk-tag" data-orbit>JavaScript</span><span class="tk-tag" data-orbit>SQL</span></div></div></div></div><div class="tk-row"><button class="tk-trigger" type="button" aria-expanded="false" aria-controls="tk-panel-1" id="tk-btn-1"><span class="tk-cat-name">Frontend</span><span class="tk-meta"><span class="tk-inline-preview" aria-hidden="true"></span><span class="tk-plus" aria-hidden="true">+</span></span></button><div class="tk-panel" id="tk-panel-1" role="region" aria-labelledby="tk-btn-1"><div class="tk-panel-inner"><div class="tk-tags"><span class="tk-tag" data-orbit>HTML &amp; CSS</span><span class="tk-tag">JavaScript</span><span class="tk-tag">Canvas games</span><span class="tk-tag">Responsive UI</span><span class="tk-tag" data-orbit>Figma</span></div></div></div></div><div class="tk-row"><button class="tk-trigger" type="button" aria-expanded="false" aria-controls="tk-panel-2" id="tk-btn-2"><span class="tk-cat-name">Databases</span><span class="tk-meta"><span class="tk-inline-preview" aria-hidden="true"></span><span class="tk-plus" aria-hidden="true">+</span></span></button><div class="tk-panel" id="tk-panel-2" role="region" aria-labelledby="tk-btn-2"><div class="tk-panel-inner"><div class="tk-tags"><span class="tk-tag" data-orbit>MySQL</span><span class="tk-tag">SQL</span><span class="tk-tag" data-orbit>ER diagrams</span><span class="tk-tag">Normalization</span><span class="tk-tag">Database design</span></div></div></div></div><div class="tk-row"><button class="tk-trigger" type="button" aria-expanded="false" aria-controls="tk-panel-3" id="tk-btn-3"><span class="tk-cat-name">Edge &amp; Deploy</span><span class="tk-meta"><span class="tk-inline-preview" aria-hidden="true"></span><span class="tk-plus" aria-hidden="true">+</span></span></button><div class="tk-panel" id="tk-panel-3" role="region" aria-labelledby="tk-btn-3"><div class="tk-panel-inner"><div class="tk-tags"><span class="tk-tag" data-orbit>Cloudflare Workers</span><span class="tk-tag" data-orbit>Netlify</span><span class="tk-tag">GitHub Pages</span></div></div></div></div><div class="tk-row"><button class="tk-trigger" type="button" aria-expanded="false" aria-controls="tk-panel-4" id="tk-btn-4"><span class="tk-cat-name">Tools &amp; Workflow</span><span class="tk-meta"><span class="tk-inline-preview" aria-hidden="true"></span><span class="tk-plus" aria-hidden="true">+</span></span></button><div class="tk-panel" id="tk-panel-4" role="region" aria-labelledby="tk-btn-4"><div class="tk-panel-inner"><div class="tk-tags"><span class="tk-tag" data-orbit>Git &amp; GitHub</span><span class="tk-tag">VS Code</span><span class="tk-tag" data-orbit>Streamlit</span><span class="tk-tag" data-orbit>Packet Tracer</span><span class="tk-tag">Canva</span></div></div></div></div></div><p class="tk-levels"><strong>Comfortable</strong> C, HTML &amp; CSS, Git &amp; GitHub · <strong>Learning</strong> Python, PHP, Java, JavaScript, SQL, Streamlit, Figma · <strong>Foundation</strong> data modelling, normalization, networking</p></div>'
+
 # ---------------- home
 shell('index', 'Md. Shyed Hasan Likhon | Software Developer Portfolio',
       'Portfolio of Md. Shyed Hasan Likhon, a CSE undergraduate at UIU building web apps, databases and service workflows in Dhaka, Bangladesh.',
-      rd('templates/home-main.html'), js=['orbit.js', 'hero-particles.js'])
+      rd('templates/home-main.html'), js=['toolkit.js', 'hero-particles.js'], css=['toolkit.css'])
 
 # ---------------- about
 cur = [('Software Engineering and Information Systems', 'Majoring in Software Engineering, with interests in system analysis, networking, databases and reliable IT services.'),
@@ -118,10 +120,9 @@ S = [('C', 'C', 'Comfortable', 'Programming fundamentals, problem solving and ac
      ('GIT', 'Git and GitHub', 'Comfortable', 'Version control, repositories, commits and project publishing.'), ('UX', 'Figma and UI tools', 'Learning', 'Wireframes, visual planning and prototyping.'),
      ('NET', 'Networking', 'Foundation', 'Packet Tracer, IP addressing, routers and switches.'), ('APP', 'Streamlit', 'Learning', 'Rapid Python interfaces for the Career Copilot prototype.')]
 sk = '<div class="g3">%s</div>' % ''.join(card(n, d, k=lv) for a, n, lv, d in S)
-orb = ('<div class="tk"><div class="orb"><canvas id="orbit" role="img" aria-label="Rotating sphere of my skills"></canvas><span class="hint">Drag to rotate</span></div><div><div id="chips" role="group" aria-label="Filter skills by group"></div>'
-       '<p style="color:var(--mu)">Tap a group to light up its tools. Levels below are honest states, not percentages.</p></div></div>')
+orb = TKHTML_CONST
 shell('skills', 'Skills | Md. Shyed Hasan Likhon', 'Tools used by Md. Shyed Hasan Likhon: C, C++, Java, Python, PHP, JavaScript, SQL and Git, with honest proficiency levels.',
-      '<main id="top">' + ph('Technical toolkit', 'Tools I use while learning and building, grouped by where they fit in my workflow.') + sec(orb) + sec('<h2>Depth by skill</h2>' + sk) + '</main>', js=['orbit.js'])
+      '<main id="top">' + ph('Technical toolkit', 'Tools I use while learning and building, grouped by where they fit in my workflow.') + sec(orb) + sec('<h2>Depth by skill</h2>' + sk) + '</main>', js=['toolkit.js'], css=['toolkit.css'])
 
 # ---------------- education
 ring = ('<div class="edu"><div class="ring"><svg viewBox="0 0 112 112" aria-hidden="true"><circle class="bg" cx="56" cy="56" r="50"/><circle class="fg" cx="56" cy="56" r="50"/></svg><div><strong>76%</strong><small>105 of 138 credits<br>33 credits remaining</small></div></div>'
@@ -165,7 +166,7 @@ form = ('<form class="fm" id="contact-form" action="https://formsubmit.co/myself
         '<label>Message<textarea name="message" required></textarea></label><button class="btn p" type="submit">Send message</button><p class="k" style="margin:0">FormSubmit emails your name, email and message to me. A spam check may be required.</p></form>') % BASE
 con = ph('Let’s build something useful', 'I’m seeking a junior software engineering role working on databases and service workflows. I bring a Software Engineering focus alongside teamwork, coordination and community service.') + sec(
     '<div class="g2"><div style="display:grid;gap:18px;align-content:start">' + card('Based in Dhaka, Bangladesh', 'Open to junior software engineer roles, internships and collaboration.', k='Location') +
-    card('Reach me directly', 'Quickest on WhatsApp. LinkedIn works for work enquiries.', lns([('Message on WhatsApp', 'https://wa.me/8801797375496'), ('LinkedIn', 'https://www.linkedin.com/in/mshlikhon/'), ('GitHub', 'https://github.com/MSHLIKHON'), ('X', 'https://x.com/shyed_likhon')])) + '</div>' + form + '</div>')
+    card('Reach me directly', 'Quickest on WhatsApp. LinkedIn works for work enquiries.', lns([('Message on WhatsApp', 'https://wa.me/8801797375496'), ('LinkedIn', 'https://www.linkedin.com/in/mshlikhon/'), ('Facebook', 'https://www.facebook.com/shyed.likhon'), ('GitHub', 'https://github.com/MSHLIKHON'), ('X', 'https://x.com/shyed_likhon')])) + '</div>' + form + '</div>')
 shell('contact', 'Contact | Md. Shyed Hasan Likhon', 'Contact Md. Shyed Hasan Likhon about junior software engineer opportunities, internships and collaboration.', '<main id="top">' + con + '</main>')
 
 # ---------------- thanks and 404
