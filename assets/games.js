@@ -170,6 +170,10 @@ function boardButtons(board, count, choose) {
   const canvas = document.querySelector('#snake-board');
   const draw = canvas.getContext('2d');
   if (!draw) return;
+  // Sharper rendering on retina displays; all drawing below is derived
+  // from canvas.width, so the board geometry is unchanged.
+  const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+  if (pixelRatio > 1) { canvas.width = 420 * pixelRatio; canvas.height = 420 * pixelRatio; }
   const status = document.querySelector('#snake-status');
   const start = document.querySelector('#snake-start');
   const size = 14;
@@ -183,20 +187,43 @@ function boardButtons(board, count, choose) {
   bestLabel.textContent = `Best: ${readBest('snake')}`;
   const same = (a, b) => a[0] === b[0] && a[1] === b[1];
 
+  function cell(x, y, inset, radius) {
+    draw.beginPath();
+    if (draw.roundRect) draw.roundRect(x, y, tile - inset * 2, tile - inset * 2, radius);
+    else draw.rect(x, y, tile - inset * 2, tile - inset * 2);
+    draw.fill();
+  }
+
   function paint() {
     draw.fillStyle = '#0a1a15';
     draw.fillRect(0, 0, canvas.width, canvas.height);
     draw.fillStyle = '#143029';
     for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) draw.fillRect(x * tile + 1, y * tile + 1, tile - 2, tile - 2);
+      for (let x = 0; x < size; x++) cell(x * tile + 1, y * tile + 1, 1, tile * 0.18);
     }
     if (food) {
+      draw.save();
       draw.fillStyle = '#ffd173';
-      draw.fillRect(food[0] * tile + 5, food[1] * tile + 5, tile - 10, tile - 10);
+      draw.shadowColor = '#ffd173';
+      draw.shadowBlur = tile * 0.55;
+      draw.beginPath();
+      draw.arc(food[0] * tile + tile / 2, food[1] * tile + tile / 2, tile * 0.3, 0, Math.PI * 2);
+      draw.fill();
+      draw.restore();
     }
     body.forEach(([x, y], i) => {
       draw.fillStyle = i ? '#43b98b' : '#a3ffd0';
-      draw.fillRect(x * tile + 2, y * tile + 2, tile - 4, tile - 4);
+      cell(x * tile + 2, y * tile + 2, 2, tile * 0.26);
+      if (!i && direction) {
+        const cx = x * tile + tile / 2, cy = y * tile + tile / 2;
+        const px = -direction[1], py = direction[0];
+        draw.fillStyle = '#0a1a15';
+        [-1, 1].forEach(side => {
+          draw.beginPath();
+          draw.arc(cx + direction[0] * tile * 0.14 + px * side * tile * 0.17, cy + direction[1] * tile * 0.14 + py * side * tile * 0.17, Math.max(1.6, tile * 0.055), 0, Math.PI * 2);
+          draw.fill();
+        });
+      }
     });
   }
 
