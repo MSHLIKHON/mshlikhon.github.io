@@ -274,3 +274,16 @@ header nav{flex-wrap:wrap}
 .funbar{margin-top:104px}
 .ph{padding-top:72px}
 }
+
+/* ---- v7: mobile Menu button + dropdown panel (replaces tab row) ---- */
+@media(max-width:900px){
+.mt{display:block}
+.ls{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:2px;overflow:visible;padding:10px 4vw 16px;margin-left:0;background:var(--bg);border-bottom:1px solid var(--ln);box-shadow:0 30px 40px -20px rgba(0,0,0,.55);opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none;transition:opacity .25s ease,transform .25s ease,visibility 0s .25s}
+nav.open .ls{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .25s ease,transform .25s ease}
+.ls a{flex:none;padding:13px 14px;border-radius:12px;font-size:.85rem;white-space:normal}
+.nav-stage-light{display:none}
+.ls a[aria-current="page"]{background:color-mix(in srgb,var(--ac) 16%,transparent);color:var(--ac)}
+nav.open .mt{border-color:var(--ac);color:var(--ac)}
+.funbar{margin-top:64px}
+.ph{padding-top:104px}
+}
