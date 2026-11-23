@@ -262,3 +262,15 @@ header nav{gap:8px}
 .wa-btn svg{width:30px;height:30px}
 .wa-tx strong{font-size:1.05rem}
 }
+
+/* ---- v5: mobile tab row (always visible, no hamburger needed) ---- */
+@media(max-width:900px){
+header nav{flex-wrap:wrap}
+.mt{display:none}
+.ls{display:flex;position:static;order:4;flex:1 1 100%;flex-direction:row;align-items:center;gap:4px;overflow-x:auto;padding:6px 0 9px;margin-left:0;max-height:none;box-shadow:none;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ls::-webkit-scrollbar{display:none}
+.ls a{flex:none;white-space:nowrap}
+.nav-stage-light{display:none}
+.funbar{margin-top:104px}
+.ph{padding-top:72px}
+}
