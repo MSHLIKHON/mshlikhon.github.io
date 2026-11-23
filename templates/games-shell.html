@@ -1,0 +1,31 @@
+<div class="arcade-shell">
+        <div class="arcade-menu" role="tablist" aria-label="Choose a game">
+          <button role="tab" id="tab-ev" aria-controls="ev-game" aria-selected="true" data-game="ev-game"><b>⚡</b><span>ChargeBD Rush<small>Balance the power</small></span><em>01</em></button>
+          <button role="tab" id="tab-snake" aria-controls="snake-game" aria-selected="false" tabindex="-1" data-game="snake-game"><b>↗</b><span>Snake<small>Chase your best</small></span><em>02</em></button>
+          <button role="tab" id="tab-ttt" aria-controls="ttt-game" aria-selected="false" tabindex="-1" data-game="ttt-game"><b>×○</b><span>Tic-Tac-Toe<small>Outsmart the computer</small></span><em>03</em></button>
+          <button role="tab" id="tab-tetris" aria-controls="tetris-game" aria-selected="false" tabindex="-1" data-game="tetris-game"><b>▟</b><span>Tetris<small>Build. Clear. Repeat.</small></span><em>04</em></button>
+          <button role="tab" id="tab-memory" aria-controls="memory-game" aria-selected="false" tabindex="-1" data-game="memory-game"><b>▦</b><span>Memory<small>Find your focus</small></span><em>04</em></button>
+        </div>
+        <div class="arcade-stage">
+          <section class="game-panel" id="ev-game" role="tabpanel" aria-labelledby="tab-ev">
+            <div class="game-intro"><span class="arcade-label">CHARGEBD / MINI SIMULATION</span><h3>Keep Dhaka charged.</h3><p>One power supply. Three EVs. Select a bay to charge it before its driver leaves. Fill batteries to 100% in 45 seconds.</p></div>
+            <div class="game-content"><div class="ev-readout"><span id="ev-clock">45 seconds</span><span id="ev-score">0 charged · 0 missed</span></div><div id="ev-bays" class="ev-bays"></div><p id="ev-status" role="status">Choose a bay after starting. Keys 1, 2, 3 work too.</p><div class="game-actions"><button id="ev-start" class="game-reset">Start charging</button><button id="ev-pause" disabled>Pause</button></div><small class="game-note">A fictional charging challenge inspired by my ChargeBD project.</small></div>
+          </section>
+          <section class="game-panel" id="snake-game" role="tabpanel" aria-labelledby="tab-snake" hidden>
+            <div class="game-intro"><span class="arcade-label">CLASSIC / REFLEX</span><h3>A familiar obsession.</h3><p>Collect the gold cells. Avoid the walls and your own tail.</p></div>
+            <div class="game-content"><div class="game-options"><label>Speed <select id="snake-speed"><option value="210">Chill</option><option value="150" selected>Classic</option><option value="95">Fast</option></select></label><span id="snake-best">Best: 0</span></div><canvas id="snake-board" width="420" height="420" tabindex="0" aria-label="Snake board. Arrow keys or WASD to move; space to pause."></canvas><div class="game-controls"><button data-direction="ArrowLeft" aria-label="Left">←</button><button data-direction="ArrowUp" aria-label="Up">↑</button><button data-direction="ArrowDown" aria-label="Down">↓</button><button data-direction="ArrowRight" aria-label="Right">→</button></div><p id="snake-status" role="status">Ready when you are.</p><div class="game-actions"><button class="game-reset" id="snake-start">Start Snake</button><button id="snake-pause" disabled>Pause</button></div><small class="game-note">Arrow keys / WASD · swipe on mobile · space to pause</small></div>
+          </section>
+          <section class="game-panel" id="ttt-game" role="tabpanel" aria-labelledby="tab-ttt" hidden>
+            <div class="game-intro"><span class="arcade-label">STRATEGY / VS COMPUTER</span><h3>Your move.</h3><p>You’re X. Connect three before the computer does.</p></div><div class="game-content"><label>Opponent <select id="ttt-level"><option value="casual">Casual</option><option value="expert">Unbeatable</option></select></label><div class="game-board ttt-board" id="ttt-board" role="group" aria-label="Tic-Tac-Toe board"></div><p id="ttt-status" role="status"></p><button class="game-reset" id="ttt-reset">New round</button></div>
+          </section>
+          <section class="game-panel" id="tetris-game" role="tabpanel" aria-labelledby="tab-tetris" hidden>
+            <div class="game-intro"><span class="arcade-label">BLOCK PUZZLE / ENDLESS</span><h3>Find your flow.</h3><p>Complete horizontal lines. Keep the stack low as the pace picks up.</p></div>
+            <div class="game-content"><div class="tetris-layout"><canvas id="tetris-board" width="300" height="600" tabindex="0" aria-label="Tetris board. Arrow keys move and rotate, Space drops, P pauses."></canvas><aside class="tetris-hud"><span>NEXT</span><canvas id="tetris-next" width="120" height="120" aria-label="Next piece"></canvas><span>SCORE</span><strong id="tetris-score">0</strong><span>LINES / LEVEL</span><strong id="tetris-level">0 / 1</strong><span>PERSONAL BEST</span><strong id="tetris-best">0</strong></aside></div><p id="tetris-status" role="status">Ready to stack?</p><div class="game-controls tetris-controls"><button data-tetris="left" aria-label="Move left">←</button><button data-tetris="rotate" aria-label="Rotate piece">↻</button><button data-tetris="right" aria-label="Move right">→</button><button data-tetris="down" aria-label="Move down">↓</button><button data-tetris="drop">Drop</button></div><div class="game-actions"><button id="tetris-start" class="game-reset">Start Tetris</button><button id="tetris-pause" disabled>Pause</button></div><small class="game-note">← → move · ↑ rotate · ↓ soft drop · Space hard drop · P pause<br>Ghost piece shows where you’ll land.</small></div>
+          </section>
+          <section class="game-panel" id="memory-game" role="tabpanel" aria-labelledby="tab-memory" hidden>
+            <div class="game-intro"><span class="arcade-label">PUZZLE / SIX PAIRS</span><h3>Less guessing. More focus.</h3><p>Match the tools in as few turns as you can.</p></div><div class="game-content"><span id="memory-best">Best: —</span><div class="game-board memory-board" id="memory-board" role="group" aria-label="Memory cards"></div><p id="memory-status" role="status"></p><button class="game-reset" id="memory-reset">Shuffle &amp; restart</button></div>
+          </section>
+        </div>
+      </div>
+      <noscript>Enable JavaScript to play the browser games.</noscript>
+    
