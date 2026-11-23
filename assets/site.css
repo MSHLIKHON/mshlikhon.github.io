@@ -86,3 +86,57 @@ footer{padding:28px 0 40px;border-top:1px solid var(--ln);color:var(--mu);font-s
 .hero{position:relative}
 .particle-field{position:absolute;inset:0;z-index:0;pointer-events:none}
 .hero>.hg{position:relative;z-index:1}
+
+/* ---- world-class polish layer ---- */
+/* nav tab bar: the original GitHub site's moving stage light, restored */
+.ls{position:relative;isolation:isolate}
+.ls a{position:relative;padding:8px 12px;border-radius:10px;border:1px solid transparent;transition:color .2s,background .2s,border-color .2s,transform .15s}
+.ls a:hover{background:var(--card)}
+.ls a:active{transform:scale(.94)}
+.ls a[aria-current]{color:var(--ac);border-color:var(--ln);background:var(--card);box-shadow:inset 0 -2px var(--ac)}
+.nav-stage-light{position:absolute;left:0;top:0;width:70px;height:100%;transform:translateX(0);pointer-events:none;z-index:-1;border-radius:12px;background:radial-gradient(ellipse at 50% -15%,rgba(var(--dot),.40),transparent 78%);border-bottom:1px solid var(--ac);box-shadow:0 8px 25px -15px var(--ac);transition:transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1)}
+.nav-stage-light::before{content:"";position:absolute;left:50%;top:-24px;width:90%;height:52px;transform:translateX(-50%);clip-path:polygon(45% 0,55% 0,100% 100%,0 100%);background:linear-gradient(rgba(var(--dot),.28),transparent)}
+@media(max-width:760px){.nav-stage-light{display:none}.ls a{padding:6px 2px}}
+/* announcement bar: a unique fun-break line on every page */
+.funbar{margin-top:64px;border-bottom:1px solid var(--ln);background:linear-gradient(100deg,rgba(var(--dot),.13),rgba(95,182,255,.08) 55%,rgba(var(--dot),.13));background-size:200% 100%;animation:fbshift 9s ease-in-out infinite alternate;position:relative;overflow:hidden}
+@keyframes fbshift{from{background-position:0% 0}to{background-position:100% 0}}
+.funbar::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.09) 50%,transparent 58%);transform:translateX(-120%);animation:fbshine 5.5s ease-in-out infinite;pointer-events:none}
+@keyframes fbshine{0%,55%{transform:translateX(-120%)}90%,100%{transform:translateX(120%)}}
+.fb-in{display:flex;align-items:center;gap:14px;min-height:46px;padding-top:6px;padding-bottom:6px}
+.fb-tag{flex:none;font:700 .68rem var(--m);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--ac);padding:4px 10px;border-radius:99px}
+.funbar p{margin:0;font-size:.9rem;color:var(--tx)}
+.funbar a{flex:none;margin-left:auto;font:600 .85rem var(--m);color:var(--ac);transition:transform .2s}
+.funbar a:hover{transform:translateX(3px)}
+.fb-x{flex:none;width:30px;height:30px;border:1px solid var(--ln);border-radius:9px;background:var(--card);color:var(--mu);font-size:1rem;cursor:pointer}
+.fb-x:hover{color:var(--ac);border-color:var(--ln2)}
+.hero{padding-top:64px}
+.ph{padding-top:104px}
+@media(max-width:760px){.funbar p{display:none}.funbar a{margin-left:0}}
+/* footer: games segment + giant sweeping wordmark */
+footer{border-top:1px solid var(--ln);margin-top:0}
+.funseg{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:52px 0 8px}
+.funseg h2{font-size:clamp(1.7rem,3.6vw,2.6rem);margin:14px 0 10px;max-width:none}
+.funseg p{margin:0;color:var(--mu);max-width:46ch}
+.funseg .fb-tag{color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.chips a{padding:11px 16px;border:1px solid var(--ln2);border-radius:99px;font:600 .85rem var(--m);background:var(--card);transition:transform .2s,border-color .2s,color .2s,box-shadow .2s}
+.chips a:hover{transform:translateY(-3px);border-color:var(--ac);color:var(--ac);box-shadow:0 12px 26px -14px var(--ac)}
+.chips a.chip-go{background:var(--ac);color:var(--ink);border-color:var(--ac)}
+.chips a.chip-go:hover{color:var(--ink)}
+.wmark{overflow:hidden;text-align:center;font:800 clamp(4rem,15.5vw,13rem)/0.95 var(--d);letter-spacing:.01em;color:transparent;-webkit-text-stroke:1px var(--ln2);background:linear-gradient(110deg,transparent 38%,rgba(var(--dot),.5) 50%,transparent 62%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;animation:wm 7s ease-in-out infinite;user-select:none;padding-top:18px}
+@keyframes wm{0%,20%{background-position:120% 0}70%,100%{background-position:-120% 0}}
+@media(max-width:860px){.funseg{grid-template-columns:1fr}.chips{justify-content:flex-start}}
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+/* cursor glow, follows the pointer on fine pointers */
+#glow{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(var(--dot),.075),transparent 65%);pointer-events:none;z-index:1}
+@media(hover:none){#glow{display:none}}
+/* primary button shine sweep */
+.btn.p{position:relative;overflow:hidden}
+.btn.p::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);transform:translateX(-130%);transition:transform .7s ease}
+.btn.p:hover::after{transform:translateX(130%)}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.funbar,.funbar::after,.wmark{animation:none}.nav-stage-light{transition:none}}
+/* hero title: keep the accent dot on the same line at every width */
+.hero h1{font-size:clamp(3.4rem,10.5vw,8.4rem);white-space:nowrap}
+.wmark{font-size:clamp(3.4rem,12.8vw,11rem);white-space:nowrap}

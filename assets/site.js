@@ -33,3 +33,12 @@ px+=(tx-px)*.14;py+=(ty-py)*.14;pv.style.transform='translate('+(px+26)+'px,'+(p
 requestAnimationFrame(loop)};
 requestAnimationFrame(loop);
 })();
+
+/* nav stage light: the original GitHub tab-bar effect */
+(()=>{const ls=document.querySelector('.ls');if(!ls||!matchMedia('(hover:hover)').matches)return;const light=document.createElement('span');light.className='nav-stage-light';light.setAttribute('aria-hidden','true');ls.prepend(light);const links=[...ls.querySelectorAll('a')];const point=l=>{if(!l)return;light.style.width=l.offsetWidth+'px';light.style.transform='translateX('+l.offsetLeft+'px)'};const reset=()=>point(ls.querySelector('[aria-current]')||links[0]);links.forEach(l=>{l.addEventListener('pointerenter',()=>point(l));l.addEventListener('focus',()=>point(l))});ls.addEventListener('pointerleave',reset);ls.addEventListener('focusout',e=>{if(!ls.contains(e.relatedTarget))reset()});new ResizeObserver(reset).observe(ls);reset()})();
+/* fun bar: dismiss for the session */
+(()=>{const fb=document.querySelector('.funbar');if(!fb)return;try{if(sessionStorage.getItem('fb-closed')){fb.remove();return}}catch(e){}const x=fb.querySelector('.fb-x');if(x)x.onclick=()=>{fb.remove();try{sessionStorage.setItem('fb-closed','1')}catch(e){}}})();
+/* scroll reveal with a gentle stagger */
+(()=>{const els=[...document.querySelectorAll('.sec .cd,.sec .row,.tl li,.funseg,.jg>*,.tk>*')];els.forEach((el,i)=>{el.classList.add('rv');el.style.transitionDelay=(i%4)*60+'ms'});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});els.forEach(el=>io.observe(el))})();
+/* cursor glow */
+(()=>{if(!matchMedia('(hover:hover)').matches)return;const g=document.createElement('div');g.id='glow';g.setAttribute('aria-hidden','true');document.body.appendChild(g);let gx=innerWidth/2,gy=innerHeight/2,tx=gx,ty=gy;addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});(function f(){gx+=(tx-gx)*.08;gy+=(ty-gy)*.08;g.style.transform='translate('+gx+'px,'+gy+'px)';requestAnimationFrame(f)})()})();

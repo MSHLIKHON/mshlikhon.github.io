@@ -9,6 +9,27 @@ LD = '{"@context":"https://schema.org","@type":"Person","name":"Md. Shyed Hasan 
 FONTS = 'https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Manrope:wght@300..800&family=Hind+Siliguri:wght@500&display=swap'
 EXT = ' target="_blank" rel="noopener"'
 
+
+FUN = {
+ 'index': 'Serious portfolio, unserious corner \u2014 the arcade is open.',
+ 'about': 'Enough about me \u2014 your turn to play.',
+ 'projects': 'You have seen the work. Now beat a high score.',
+ 'skills': 'Reflexes are a skill too. Prove it in the arcade.',
+ 'games': 'You are in the fun zone. New high score loading\u2026',
+ 'github': 'Code checked. Now check your Tetris stack.',
+ 'education': 'Study break, officially approved.',
+ 'leadership': 'Leading by example: breaks included.',
+ 'resume': 'Hiring? First, a quick game \u2014 for research.',
+ 'contact': 'One quick game before you hit send?',
+ 'thanks': 'Message sent. Reward yourself with a game.',
+ '404': 'This page rage-quit. The games did not.',
+}
+FUNBAR = '<div class="funbar"><div class="w fb-in"><span class="fb-tag">Fun break</span><p>%s</p><a href="games.html">Take a break \u2192</a><button class="fb-x" type="button" aria-label="Dismiss announcement">\u00d7</button></div></div>'
+FUNSEG = ('<div class="w funseg"><div class="funseg-copy"><span class="fb-tag">Take a break</span>'
+ '<h2>All work? Take a play break.</h2><p>Five tiny browser games, built with the same care as the serious stuff. No sign-up, no downloads \u2014 just play.</p></div>'
+ '<div class="chips"><a href="games.html">ChargeBD Rush</a><a href="games.html">Tetris</a><a href="games.html">Snake</a><a href="games.html">Tic-Tac-Toe</a><a href="games.html">Memory</a><a class="chip-go" href="games.html">Open the arcade \u2192</a></div></div>')
+WMARK = '<div class="wmark" aria-hidden="true">LIKHON_</div>'
+
 def shell(key, title, desc, main, js=(), css=(), noindex=False):
     home = key == 'index'
     url = BASE + ('' if home else key + '.html')
@@ -30,7 +51,8 @@ def shell(key, title, desc, main, js=(), css=(), noindex=False):
     body = ('<body>\n%s<div id="bar"></div>' + field + '<div id="pv" aria-hidden="true"><img alt=""></div>\n'
         '<header><nav class="w" aria-label="Primary"><a class="brand" href="index.html">LIKHON<i>_</i></a><div class="ls">%s</div>'
         '<button id="theme" type="button" aria-label="Switch light or dark theme">◐</button><button id="mt" class="mt" type="button" aria-label="Menu" aria-expanded="false">Menu</button></nav></header>\n'
-        '%s\n<footer><div class="w fr"><span>© 2026 Md. Shyed Hasan Likhon</span><div>%s</div></div></footer>\n'
+        + (FUNBAR % FUN.get(key, 'Take a break.')) + '\n'
+        '%s\n<footer>' + FUNSEG + '<div class="w fr"><span>© 2026 Md. Shyed Hasan Likhon</span><div>%s</div></div>' + WMARK + '</footer>\n'
         '<script defer src="assets/site.js"></script>\n%s</body>\n</html>\n') % (
         '<div class="intro" aria-hidden="true"><span lang="bn">স্বাগতম</span></div>\n' if home else '', links, main, foot,
         ''.join('<script defer src="assets/%s"></script>\n' % j for j in js))
