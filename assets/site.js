@@ -42,3 +42,4 @@ requestAnimationFrame(loop);
 (()=>{const els=[...document.querySelectorAll('.sec .cd,.sec .row,.tl li,.funseg,.jg>*,.tk>*')];els.forEach((el,i)=>{el.classList.add('rv');el.style.transitionDelay=(i%4)*60+'ms'});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});els.forEach(el=>io.observe(el))})();
 /* cursor glow */
 (()=>{if(!matchMedia('(hover:hover)').matches)return;const g=document.createElement('div');g.id='glow';g.setAttribute('aria-hidden','true');document.body.appendChild(g);let gx=innerWidth/2,gy=innerHeight/2,tx=gx,ty=gy;addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});(function f(){gx+=(tx-gx)*.08;gy+=(ty-gy)*.08;g.style.transform='translate('+gx+'px,'+gy+'px)';requestAnimationFrame(f)})()})();
+(()=>{const g=document.querySelector('.game-btn');if(g&&location.pathname.endsWith('games.html'))g.setAttribute('aria-current','page')})();
