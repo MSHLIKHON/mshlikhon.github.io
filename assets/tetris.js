@@ -5,6 +5,17 @@
   const preview = document.querySelector('#tetris-next').getContext('2d');
   const start = document.querySelector('#tetris-start'), pause = document.querySelector('#tetris-pause');
   const status = document.querySelector('#tetris-status');
+  // Sharper rendering on retina displays; every draw call below works in
+  // the same 300x600 / 120x120 coordinate space, only the backing store grows.
+  const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+  if (pixelRatio > 1) {
+    canvas.width = 300 * pixelRatio; canvas.height = 600 * pixelRatio;
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    const nextCanvas = document.querySelector('#tetris-next');
+    nextCanvas.width = 120 * pixelRatio; nextCanvas.height = 120 * pixelRatio;
+    preview.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+  }
+  let bgGradient = null;
   const shapes = [ [[1,1,1,1]], [[1,1],[1,1]], [[0,1,0],[1,1,1]], [[0,1,1],[1,1,0]], [[1,1,0],[0,1,1]], [[1,0,0],[1,1,1]], [[0,0,1],[1,1,1]] ];
   const colors = ['#66d9ef','#f7d46e','#c4a0ff','#72f6b1','#ff8291','#7da9ff','#f7ad73'];
   let grid, piece, next, bag = [], score = 0, lines = 0, active = false, paused = false, frame, last = 0, elapsed = 0;
@@ -19,13 +30,23 @@
   function fits(matrix, x, y) {
     return matrix.every((row, dy) => row.every((cell, dx) => !cell || (x+dx >= 0 && x+dx < 10 && y+dy >= 0 && y+dy < 20 && !grid[y+dy][x+dx])));
   }
+  function blockPath(context, px, py, w, h, r) {
+    context.beginPath();
+    if (context.roundRect) context.roundRect(px, py, w, h, r);
+    else context.rect(px, py, w, h);
+  }
   function block(context, x, y, color, size, ghost = false) {
-    context.fillStyle = color;
-    if (ghost) { context.strokeStyle = color; context.lineWidth = 1.5; context.strokeRect(x*size+3,y*size+3,size-6,size-6); }
-    else { context.fillRect(x*size+1,y*size+1,size-2,size-2); context.fillStyle = '#ffffff35';context.fillRect(x*size+3,y*size+3,size-6,3); }
+    if (ghost) { context.strokeStyle = color; context.lineWidth = 1.5; blockPath(context, x*size+3, y*size+3, size-6, size-6, size*0.18); context.stroke(); }
+    else {
+      context.fillStyle = color;
+      blockPath(context, x*size+1, y*size+1, size-2, size-2, size*0.2); context.fill();
+      context.fillStyle = '#ffffff38'; blockPath(context, x*size+4, y*size+3, size-8, 4, 2); context.fill();
+      context.fillStyle = '#00000020'; blockPath(context, x*size+4, y*size+size-7, size-8, 4, 2); context.fill();
+    }
   }
   function paint() {
-    ctx.fillStyle = '#091b16'; ctx.fillRect(0,0,300,600);
+    if (!bgGradient) { bgGradient = ctx.createLinearGradient(0, 0, 0, 600); bgGradient.addColorStop(0, '#0c211a'); bgGradient.addColorStop(1, '#071510'); }
+    ctx.fillStyle = bgGradient; ctx.fillRect(0,0,300,600);
     ctx.strokeStyle = '#ffffff08';
     for(let x=0;x<=10;x++){ctx.beginPath();ctx.moveTo(x*30,0);ctx.lineTo(x*30,600);ctx.stroke();}
     for(let y=0;y<=20;y++){ctx.beginPath();ctx.moveTo(0,y*30);ctx.lineTo(300,y*30);ctx.stroke();}
@@ -41,7 +62,7 @@
     document.querySelector('#tetris-score').textContent=score;
     document.querySelector('#tetris-level').textContent=`${lines} / ${level()}`;
     document.querySelector('#tetris-best').textContent=readBest('tetris');
-    if(paused || !active){ctx.fillStyle='#06100dcc';ctx.fillRect(0,235,300,115);ctx.fillStyle='#ecfff7';ctx.textAlign='center';ctx.font='bold 21px system-ui';ctx.fillText(paused?'PAUSED':piece?'GAME OVER':'READY TO STACK',150,285);ctx.font='13px system-ui';ctx.fillText(paused?'Resume when you’re ready':piece?'Try another round':'Press Start Tetris',150,315);}
+    if(paused || !active){ctx.fillStyle='#050f0bd9';ctx.fillRect(0,235,300,115);ctx.fillStyle='#72f6b1';ctx.fillRect(0,235,300,2);ctx.fillStyle='#ecfff7';ctx.textAlign='center';ctx.font='700 21px Sora, system-ui, sans-serif';ctx.fillText(paused?'PAUSED':piece?'GAME OVER':'READY TO STACK',150,285);ctx.font='500 13px "JetBrains Mono", ui-monospace, monospace';ctx.fillText(paused?'Resume when you’re ready':piece?'Try another round':'Press Start Tetris',150,315);}
   }
   function spawn() {
     piece={type:next,matrix:shapes[next].map(row=>row.slice()),x:Math.floor((10-shapes[next][0].length)/2),y:0};next=take();
@@ -80,4 +101,5 @@
   document.addEventListener('visibilitychange',autoPause);document.addEventListener('arcadechange',autoPause);
   window.addEventListener('blur',()=>{if(active&&!paused)togglePause();});
   grid=Array.from({length:20},()=>Array(10).fill(0));next=take();paint();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => paint());
 })();
