@@ -188,3 +188,49 @@ html[data-theme="light"] .ecl-core{background:linear-gradient(145deg,#ffe9a8,#ff
 .tk-levels{margin:22px 2px 0;color:var(--mu);font-size:.94rem}
 .tk-levels strong{color:var(--tx)}
 @media(prefers-reduced-motion:reduce){.mq-track,.intro-word,.pt,.pt .chip{animation:none}.intro-line{transform:none}}
+
+/* ---- v3: reference-style hero composition, denser top ---- */
+.hero{padding:30px 0 58px}
+.hg{gap:44px}
+.kick{display:inline-flex;align-items:center;gap:9px;font:600 .78rem var(--m);letter-spacing:.22em;text-transform:uppercase;color:var(--ac);margin-bottom:20px}
+.kick b{width:8px;height:8px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 0 rgba(var(--dot),.5);animation:pl 2.4s infinite}
+.first{letter-spacing:.32em;text-transform:uppercase;font-weight:600;font-size:clamp(1rem,1.9vw,1.3rem)}
+.hero .role{margin-top:20px}
+.hero .role i{color:var(--ac);font-style:normal;margin:0 .3em}
+.seek{margin-top:12px;font-weight:600;color:var(--tx);font-size:1.06rem}
+.hero .btns .btn{text-transform:uppercase;font-family:var(--m);letter-spacing:.05em;font-size:.84rem}
+.srow{display:flex;gap:14px 26px;flex-wrap:wrap;margin-top:30px;font:600 .78rem var(--m);letter-spacing:.13em;text-transform:uppercase}
+.srow a{color:var(--mu);transition:color .2s}
+.srow a:hover{color:var(--ac)}
+.hg{position:relative}
+.hg::after{content:"";position:absolute;right:-6px;top:3%;width:45%;height:90%;transform:skewY(-3.5deg);background:linear-gradient(165deg,rgba(var(--dot),.09),transparent 65%);border:1px solid var(--ln);border-radius:30px;z-index:0;pointer-events:none}
+.hg>div,.hg>.pt{position:relative;z-index:1}
+.ptag{position:absolute;z-index:3;font:600 .7rem var(--m);letter-spacing:.13em;text-transform:uppercase;padding:8px 12px;border:1px solid var(--ln2);border-radius:9px;background:color-mix(in srgb,var(--bg) 74%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:var(--tx);box-shadow:0 12px 26px -14px rgba(0,0,0,.6)}
+.ptag.t1{top:15%;left:-24px}
+.ptag.t2{top:52%;right:-14px}
+.chip .open{display:inline-flex;align-items:center;gap:8px}
+.chip .open b{width:7px;height:7px;border-radius:50%;background:var(--ac);animation:pl 2.4s infinite}
+/* brand with avatar, boxed like the reference */
+.brand{gap:10px;border:1px solid var(--ln2);border-radius:13px;padding:5px 13px 5px 5px;background:color-mix(in srgb,var(--card) 65%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 22px -14px rgba(0,0,0,.55);transition:border-color .2s,transform .2s}
+.brand:hover{border-color:var(--ac);transform:translateY(-1px)}
+.brand-av{width:34px;height:34px;border-radius:9px;object-fit:cover;display:block}
+.ls a{text-transform:uppercase;font-family:var(--m);font-size:.76rem;letter-spacing:.09em}
+@media(max-width:1240px){.ls a{padding:9px 9px}.ls{gap:2px}}
+@media(max-width:900px){.hg::after{display:none}.ptag.t1{left:8px}.ptag.t2{right:8px}.hero{padding-top:22px}}
+@media(prefers-reduced-motion:reduce){.kick b,.chip .open b{animation:none}}
+
+/* ---- v3 fixes ---- */
+.brand{flex-direction:row;flex-wrap:nowrap;align-items:center;white-space:nowrap}
+.brand i{font-style:normal}
+.game-btn,#theme{flex:none}
+.hero{min-height:0}
+.ptag.t1{left:12px}
+.ptag.t2{right:12px}
+.chip .odot{width:7px;height:7px;border-radius:50%;background:var(--ac);flex:none;animation:pl 2.4s infinite}
+.chip .open b{animation:none;box-shadow:none;width:auto;height:auto;background:none}
+@media(prefers-reduced-motion:reduce){.chip .odot{animation:none}}
+
+.brand{display:inline-flex}
+
+header nav.w{max-width:1440px;width:96vw}
+@media(max-width:1400px){.ls a{padding:9px 8px;letter-spacing:.05em}}
